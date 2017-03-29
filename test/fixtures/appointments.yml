@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: MyString
+  idClient: MyString
+  idEmployee: 
+  payment: false
+  Client: one
+  Employee: one
+
+two:
+  id: MyString
+  idClient: MyString
+  idEmployee: 
+  payment: false
+  Client: two
+  Employee: two
