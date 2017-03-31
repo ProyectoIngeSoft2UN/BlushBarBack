@@ -6,7 +6,7 @@ class CreateEmployees < ActiveRecord::Migration[5.0]
       t.string :lastName
       t.string :email
       t.string :phone
-      t.image :photo
+      t.text :photo
       t.references :Store, foreign_key: true
 
       t.timestamps
