@@ -2,6 +2,10 @@ class Admin < ApplicationRecord
   belongs_to :Store
   has_one :Image
 
+  validates :name,  presence: true
+  validates :lastname,  presence: true
+  validates :email, presence: true, format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
+  validates :phone, presence: true
   def self.load_admins
     includes(:name,:lastName,:email,:phone,:photo,store:[:address, :city])
   end
