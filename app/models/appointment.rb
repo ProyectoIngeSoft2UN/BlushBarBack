@@ -2,6 +2,10 @@ class Appointment < ApplicationRecord
   belongs_to :Client
   belongs_to :Employee
 
+  validates :idClient, presence: true
+  validates :idEmployee, presence: true
+  validates :payment, presence: true
+
   def self.get_appointments
     include(:idEmployee,:idClient,:payment)
   end

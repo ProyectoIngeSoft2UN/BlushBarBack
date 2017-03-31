@@ -4,6 +4,14 @@ class Employee < ApplicationRecord
   has_many :Appointments
   has_many :Clients , through:Appointments
 
+  validates :name, presence: true
+  validates :lastname, presence: true
+  validates :email, presence: true,  format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
+  validates :phone, presence: true
+
+  #validates_associated
+  validates_associated :Appointments
+
   def self.get_employees
 		include(:name,:lastName,:email,:phone,:photo,store:[:address, :city])
 	end
@@ -26,6 +34,6 @@ class Employee < ApplicationRecord
 
 	def self.get_appointments
     joins(:appointment).select("appointment.*")
-		.where(:id =>{:idEmployee})
+		.where(:id =>:idEmployee)
   end
 end
