@@ -1,4 +1,5 @@
 class Admin < ApplicationRecord
+	has_secure_password
 	has_one :store
 
 	validates :name,  presence: true, format: { with:/[a-z ,.'-]+/i, message: "Name must be string" }
