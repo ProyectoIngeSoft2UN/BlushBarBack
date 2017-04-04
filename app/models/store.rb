@@ -12,6 +12,6 @@ class Store < ApplicationRecord
 	#validates_associated :products
 
 	def self.get_stores
-		include(:address,:city,:phone,:email)
+		include(:address,:city,:phone,:email, :admin)
 	end
 end

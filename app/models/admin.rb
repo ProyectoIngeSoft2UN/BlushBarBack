@@ -10,7 +10,7 @@ class Admin < ApplicationRecord
 	validates :password, length: {minimum: 8, message: 'Password longitud minima de 8 '}
 
 	def self.load_admins
-		includes(:name,:lastName,:email,:phone,:photo,store:[:address, :city])
+		includes(:name,:lastName,:email,:phone,store:[:address, :city])
 	end
 
 	def self.get_products

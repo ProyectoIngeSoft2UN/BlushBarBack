@@ -10,7 +10,7 @@ class Employee < ApplicationRecord
   #validates_associated :appointments
 
   def self.get_employees
-    include(:name,:lastName,:email,:phone,:photo,store:[:address, :city])
+    include(:name,:lastName,:email,:phone, store:[:address, :city])
   end
 
   def self.get_products
