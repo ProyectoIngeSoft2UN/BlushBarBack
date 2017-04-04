@@ -56,7 +56,7 @@ end
 
 Store.destroy_all
 
-Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin: Admin.get(1))
+Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin: 1)
 Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin: 2)
 Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin: 3)
 Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin: 4)

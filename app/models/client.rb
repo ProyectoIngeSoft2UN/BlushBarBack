@@ -31,6 +31,6 @@ class Client < ApplicationRecord
 
 	def self.get_appointments
 		joins(:appointment).select("appointment.*")
-		.where(:id =>:idClient)
+		.where(:id =>:client)
 	end
 end

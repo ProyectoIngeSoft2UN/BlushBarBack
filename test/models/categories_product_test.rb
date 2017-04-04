@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ProductsCategoryTest < ActiveSupport::TestCase
+class CategoriesProductTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
