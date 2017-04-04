@@ -6,4 +6,15 @@ class Appointment < ApplicationRecord
   validates :employee, presence {message: 'IdEmployee no debe ser vacio'}
   validates :payment, presence {message: 'Payment no debe ser vacio'}
   validates :active, presence {message: 'Active no debe ser vacio'}
+
+  def self.get_appointments
+    include(:idEmployee,:idClient,:payment)
+  end
+
+  def self.get_appointments_store_employee(q)
+    include(:idEmployee,:idClient,:payment)
+    .where(clients:{
+        id: q
+      })
+  end
 end
