@@ -1,17 +1,17 @@
 class Store < ApplicationRecord
-	has_one :Admin
-	has_many :Products
-	has_many :Employees
-	has_many :Purchases , through:Products
+  belongs_to :admin
+  has_many :employees
+  has_and_belongs_to_many :products
 
-	validates :address, :city,:phone, presence: true
-	validates :email presence: true,  format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
-	#validates_associated
-  validates_associated :Employees
-	validates_associated :Products
-		
+  validates :address, presence: {message: 'La direccion no debe ser vacia'}
+  validates :city, presence: {message: 'La ciudad no debe ser vacia'}
+  validates :phone, presence: {message: 'El telefono no debe ser vacio'}
+  validates :email, presence: {message: 'El correo no debe ser vacio'}, format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
+  validates :admin, presence: {message: 'El IdAdmin no debe ser vacio'}
+  #validates_associated :employees
+	#validates_associated :products
+
 	def self.get_stores
-		include(:address,:city,:phone,:email)
+		include(:address,:city,:phone,:email, :admin)
 	end
-
 end

@@ -1,8 +1,6 @@
 class Image < ApplicationRecord
-	belongs_to :Client
-	belongs_to :Admin
-	belongs_to :Employee
-	has_and_belongs_to_many :Product
+	has_and_belongs_to_many :products
 
-	
+	validates :name, presence: {message: 'Nombre no debe ser vacio'}
+	validates :description, presence: {message: 'La descripcion no debe ser vacia'}
 end

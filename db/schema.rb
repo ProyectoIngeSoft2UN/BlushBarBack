@@ -10,30 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331042705) do
+ActiveRecord::Schema.define(version: 20170404045018) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
+    t.string   "cc"
     t.string   "name"
     t.string   "lastName"
     t.string   "email"
+    t.string   "password_digest"
     t.string   "phone"
-    t.text     "photo"
-    t.integer  "Store_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["Store_id"], name: "index_admins_on_Store_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "appointments", force: :cascade do |t|
-    t.string   "idClient"
-    t.string   "idEmployee"
+    t.integer  "client_id"
+    t.integer  "employee_id"
     t.boolean  "payment"
-    t.integer  "Client_id"
-    t.integer  "Employee_id"
+    t.boolean  "active"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["Client_id"], name: "index_appointments_on_Client_id"
-    t.index ["Employee_id"], name: "index_appointments_on_Employee_id"
+    t.index ["client_id"], name: "index_appointments_on_client_id", using: :btree
+    t.index ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -43,26 +44,37 @@ ActiveRecord::Schema.define(version: 20170331042705) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "categories_products", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_categories_products_on_category_id", using: :btree
+    t.index ["product_id"], name: "index_categories_products_on_product_id", using: :btree
+  end
+
   create_table "clients", force: :cascade do |t|
+    t.string   "cc"
     t.string   "name"
     t.string   "lastName"
     t.string   "email"
+    t.string   "password_digest"
     t.string   "phone"
-    t.text     "photo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "employees", force: :cascade do |t|
+    t.string   "cc"
     t.string   "name"
     t.string   "lastName"
     t.string   "email"
+    t.string   "password_digest"
     t.string   "phone"
-    t.text     "photo"
-    t.integer  "Store_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["Store_id"], name: "index_employees_on_Store_id"
+    t.integer  "store_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["store_id"], name: "index_employees_on_store_id", using: :btree
   end
 
   create_table "images", force: :cascade do |t|
@@ -73,12 +85,12 @@ ActiveRecord::Schema.define(version: 20170331042705) do
   end
 
   create_table "images_products", force: :cascade do |t|
-    t.integer  "Image_id"
-    t.integer  "Product_id"
+    t.integer  "product_id"
+    t.integer  "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["Image_id"], name: "index_images_products_on_Image_id"
-    t.index ["Product_id"], name: "index_images_products_on_Product_id"
+    t.index ["image_id"], name: "index_images_products_on_image_id", using: :btree
+    t.index ["product_id"], name: "index_images_products_on_product_id", using: :btree
   end
 
   create_table "products", force: :cascade do |t|
@@ -89,22 +101,25 @@ ActiveRecord::Schema.define(version: 20170331042705) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "products_categories", force: :cascade do |t|
-    t.integer  "Category_id"
-    t.integer  "Product_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["Category_id"], name: "index_products_categories_on_Category_id"
-    t.index ["Product_id"], name: "index_products_categories_on_Product_id"
+  create_table "products_stores", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_products_stores_on_product_id", using: :btree
+    t.index ["store_id"], name: "index_products_stores_on_store_id", using: :btree
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.string   "idProduct"
     t.integer  "cost"
+    t.integer  "client_id"
+    t.integer  "product_id"
     t.string   "payment"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["client_id"], name: "index_purchases_on_client_id", using: :btree
+    t.index ["product_id"], name: "index_purchases_on_product_id", using: :btree
   end
 
   create_table "stores", force: :cascade do |t|
@@ -112,8 +127,22 @@ ActiveRecord::Schema.define(version: 20170331042705) do
     t.string   "city"
     t.string   "phone"
     t.string   "email"
+    t.integer  "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_stores_on_admin_id", using: :btree
   end
 
+  add_foreign_key "appointments", "clients"
+  add_foreign_key "appointments", "employees"
+  add_foreign_key "categories_products", "categories"
+  add_foreign_key "categories_products", "products"
+  add_foreign_key "employees", "stores"
+  add_foreign_key "images_products", "images"
+  add_foreign_key "images_products", "products"
+  add_foreign_key "products_stores", "products"
+  add_foreign_key "products_stores", "stores"
+  add_foreign_key "purchases", "clients"
+  add_foreign_key "purchases", "products"
+  add_foreign_key "stores", "admins"
 end

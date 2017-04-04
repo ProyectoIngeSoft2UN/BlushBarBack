@@ -1,19 +1,20 @@
 class Purchase < ApplicationRecord
-	has_many :Clients
-	has_many :Products
-	#Local validations
-	validates :cost, presence: true, numericality: true
-	validates :idProduct,:payment, presence: true
+  belongs_to :client
+  belongs_to :product
 
-	#validates_associated
-	validates_associated :Client
-	validates_associated :Products
-	
-	def self.get_purchases
-		include(:idProduct,:cost,:payment,:description)
-	end
+  validates :cost, presence: {message: 'Costo no debe ser vacio'}, numericality: true
+  validates :client, presence: {message: 'IdCliente no debe ser vacio'}
+  validates :product, presence: {message: 'IdProduct no debe ser vacio'}
+  validates :payment, presence: {message: 'Payment no debe ser vacio'}
+  validates :description, presence: true, allow_blank: true
+  #validates_associated :client
+  #validates_associated :products
 
-	def self.get_purchases_products
-		include(idProduct: [:name],:cost,:payment,:description)
-	end
+  def self.get_purchases
+    include(:cost, :client, :product, :payment, :description)
+  end
+
+  def self.get_purchases_products
+    include(:product,:cost,:payment,:description)
+  end
 end

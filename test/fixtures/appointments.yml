@@ -1,17 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: MyString
-  idClient: MyString
-  idEmployee: 
+  client: one
+  employee: one
   payment: false
-  Client: one
-  Employee: one
+  active: false
 
 two:
-  id: MyString
-  idClient: MyString
-  idEmployee: 
+  client: two
+  employee: two
   payment: false
-  Client: two
-  Employee: two
+  active: false
