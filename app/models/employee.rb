@@ -3,6 +3,7 @@ class Employee < ApplicationRecord
   belongs_to :store
   has_many :appointments
 
+  validates :cc, presence: true
   validates :name,  presence: true, format: { with:/[a-z ,.'-]+/i, message: "Name must be string" }
   validates :lastName,  presence: true, format: { with: /[a-z ,.'-]+/i, message: "LastName must be string" }
   validates :email, presence: true, format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
@@ -10,27 +11,15 @@ class Employee < ApplicationRecord
   #validates_associated :appointments
 
   def self.get_employees
-    include(:name,:lastName,:email,:phone, store:[:address, :city])
+    select(:cc,:name,:lastName,:email,:phone,:store_id)
   end
 
-  def self.get_products
-    joins(:product).select("product.*")
+  def self.get_by_id(id)
+    select(:cc,:name,:lastName,:email,:phone,:store).where(id: id)
   end
 
-  def self.get_products_by_cost
-    get_products.order(:cost)
+  def self.get_by_cc(cc)
+    select(:cc,:name,:lastName,:email,:phone,:store).where(cc: cc)
   end
 
-  def self.get_products_by_name
-    get_products.order(:name)
-  end
-
-  def self.get_products_by_name_desc
-    get_products.order(name: :desc)
-  end
-
-  def self.get_appointments
-    joins(:appointment).select("appointment.*")
-    .where(:id =>:idEmployee)
-  end
 end

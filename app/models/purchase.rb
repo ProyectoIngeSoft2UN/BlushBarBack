@@ -11,7 +11,7 @@ class Purchase < ApplicationRecord
   #validates_associated :products
 
   def self.get_purchases
-    include(:cost, :client, :product, :payment, :description)
+    select(:cost,:client,:product,:payment,:description)
   end
 
   def self.get_purchases_products
