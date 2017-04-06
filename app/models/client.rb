@@ -1,6 +1,7 @@
 class Client < ApplicationRecord
 	has_secure_password
 	has_many :purchases
+	has_many :employees, through: :appointments
 	has_many :appointments
 
 	validates :cc, presence: true
@@ -22,11 +23,11 @@ class Client < ApplicationRecord
 	end
 	#Falla
 	def self.get_appointments_by_client_id(q)
-		joins(:appointment).select('"appointments"."payment"','"appointments"."payment"','"appointments"."active"').where(id: q)
+		self.joins(:appointments).select(:id,:payment).where(client_id: q)
 	end
 	#Falla
 	def self.get_appointments_by_client_cc(q)
-		joins(:appointment).select('"appointments"."payment"','"appointments"."payment"','"appointments"."active"').where(cc: q)
+		joins(:appointments).select('"appointments"."payment"','"appointments"."payment"','"appointments"."active"').where(cc: q)
 	end
 	#Falla
 	def self.get_purchases_by_client_id(q)

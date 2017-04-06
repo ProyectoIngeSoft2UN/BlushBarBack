@@ -1,7 +1,7 @@
 class Employee < ApplicationRecord
   has_secure_password
   belongs_to :store
-  has_many :appointments
+  has_many :clients, through: :appointments
 
   validates :cc, presence: true
   validates :name,  presence: true, format: { with:/[a-z ,.'-]+/i, message: "Name must be string" }

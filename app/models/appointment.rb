@@ -13,7 +13,8 @@ class Appointment < ApplicationRecord
   end
   #Falla
   def self.get_appointments_by_employee_id(q)
-    joins(:employee).select(:id,:client_id,:employee_id,'"employees"."name"','"employees"."lastName"',:payment,:active).where(employees:{id: q})
+    joins(:employee)
+    .where(employees:{id: q}).group('"employee"."id"')
   end
   #Falla
   def self.get_appointments_by_client_id(q)
