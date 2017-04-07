@@ -11,6 +11,10 @@ class Store < ApplicationRecord
   #validates_associated :employees
 	#validates_associated :products
 
+  def self.get_stores(page = 1, paginate = 10)
+		select(:address,:city,:phone,:email,:admin)
+    .paginate(:page => page,:per_page => per_page)
+	end
 
   def self.get_by_city(city)
     where(city: city)
@@ -27,10 +31,6 @@ class Store < ApplicationRecord
   def self.get_by_phone(city)
     where(phone: city)
   end
-
-	def self.get_stores
-		select(:address,:city,:phone,:email,:admin)
-	end
 
   def self.get_admin_of(id)
     includes(:admin).where(admin: id)

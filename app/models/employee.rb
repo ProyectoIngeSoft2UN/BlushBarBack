@@ -11,8 +11,9 @@ class Employee < ApplicationRecord
   validates :phone, presence: true,  format: { with:  /[0-9]*/, message: "Phone must be a number" }
   #validates_associated :appointments
 
-  def self.get_employees
+  def self.get_employees(page = 1, per_page = 10)
     select(:cc,:name,:lastName,:email,:phone,:store_id)
+    .paginate(:page => page,:per_page => per_page)
   end
 
   def self.get_by_id(id)

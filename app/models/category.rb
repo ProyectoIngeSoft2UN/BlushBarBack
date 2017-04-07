@@ -4,8 +4,9 @@ class Category < ApplicationRecord
 	validates :name, presence: {message: 'Nombre no debe estar vacio'}
 	validates :description, presence: {message: 'La descripccion no debe estar vacio'}
 
-	def self.get_categories
+	def self.get_categories(page = 1, per_page = 10)
 		select(:name)
+		.paginate(:page => page,:per_page => per_page)
 	end
 
 	def self.get_description_by_name(cat)

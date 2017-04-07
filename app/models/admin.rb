@@ -10,8 +10,9 @@ class Admin < ApplicationRecord
 	validates :password, presence: {message: 'Password no debe ser vacio'}
 	validates :password, length: {minimum: 8, message: 'Password longitud minima de 8 '}
 
-	def self.load_admins
+	def self.load_admins(page = 1, per_page = 10)
 		select(:cc,:name,:lastName,:email,:phone)
+		.paginate(:page => page,:per_page => per_page)
 	end
 
 	def self.get_by_id(id)
