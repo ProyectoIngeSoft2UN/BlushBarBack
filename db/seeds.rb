@@ -21,16 +21,16 @@ end
 Product.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("products")
 
-Product.create!(name: 'Galateis Douceur', description: Faker::Lorem.sentence, cost: 137000)#Gel
-Product.create!(name: 'Pure Tonic', description: Faker::Lorem.sentence, cost: 121000)#Tonicos
-Product.create!(name: 'Cocoa Powder', description: Faker::Lorem.sentence, cost: 137000)#Polvos
-Product.create!(name: 'Soft Matte Lip Cream', description: Faker::Lorem.sentence, cost: 39000)#Lipstick
-Product.create!(name: 'Grandiose Liner', description: Faker::Lorem.sentence, cost: 158000)#Delineador
-Product.create!(name: 'Slide on pincel', description: Faker::Lorem.sentence, cost: 42000)#Delineador
-Product.create!(name: 'Sourcilis Styler', description: Faker::Lorem.sentence, cost: 114000)#Cejas
-Product.create!(name: 'Pattent Shine', description: Faker::Lorem.sentence, cost: 73000)#Esmalte
-Product.create!(name: 'Nutrient Dense Oil', description: Faker::Lorem.sentence, cost: 234000)#Aceite
-Product.create!(name: 'Virgin Luxury Oil', description: Faker::Lorem.sentence, cost: 290000)#Aceite
+Product.create!(name: 'Galateis Douceur', description: Faker::Lorem.sentence, cost: 137000, quantity: Faker::Number.between(0,50),available: true)#Gel
+Product.create!(name: 'Pure Tonic', description: Faker::Lorem.sentence, cost: 121000, quantity: Faker::Number.between(0,50),available: true)#Tonicos
+Product.create!(name: 'Cocoa Powder', description: Faker::Lorem.sentence, cost: 137000, quantity: Faker::Number.between(0,50),available: true)#Polvos
+Product.create!(name: 'Soft Matte Lip Cream', description: Faker::Lorem.sentence, cost: 39000, quantity: Faker::Number.between(0,50),available: true)#Lipstick
+Product.create!(name: 'Grandiose Liner', description: Faker::Lorem.sentence, cost: 158000, quantity: Faker::Number.between(0,50),available: true)#Delineador
+Product.create!(name: 'Slide on pincel', description: Faker::Lorem.sentence, cost: 42000, quantity: Faker::Number.between(0,50),available: true)#Delineador
+Product.create!(name: 'Sourcilis Styler', description: Faker::Lorem.sentence, cost: 114000, quantity: Faker::Number.between(0,50),available: true)#Cejas
+Product.create!(name: 'Pattent Shine', description: Faker::Lorem.sentence, cost: 73000, quantity: Faker::Number.between(0,50),available: true)#Esmalte
+Product.create!(name: 'Nutrient Dense Oil', description: Faker::Lorem.sentence, cost: 234000, quantity: Faker::Number.between(0,50),available: true)#Aceite
+Product.create!(name: 'Virgin Luxury Oil', description: Faker::Lorem.sentence, cost: 290000, quantity: Faker::Number.between(0,50),available: true)#Aceite
 
 Category.destroy_all
 

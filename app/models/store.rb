@@ -11,7 +11,45 @@ class Store < ApplicationRecord
   #validates_associated :employees
 	#validates_associated :products
 
+
+  def self.get_by_city(city)
+    where(city: city)
+  end
+
+  def self.get_by_address(city)
+    where(address: city)
+  end
+
+  def self.get_by_email(city)
+    where(email: city)
+  end
+
+  def self.get_by_phone(city)
+    where(phone: city)
+  end
+
 	def self.get_stores
-		include(:address,:city,:phone,:email, :admin)
+		select(:address,:city,:phone,:email,:admin)
 	end
+  #Falla
+  def self.get_admin_of(id)
+    puts id
+    includes(:admin).select(:id,:address,'"admins"."id", "admins"."cc", "admins"."name"').where(admin: id).references(:admins)
+  end
+
+  def self.get_address(id)
+    select(:address).where(id: id)
+  end
+
+  def self.get_city(id)
+    select(:city).where(id: id)
+  end
+
+  def self.get_phone(id)
+    select(:phone).where(id: id)
+  end
+
+  def self.get_email(id)
+    select(:email).where(id: id)
+  end
 end
