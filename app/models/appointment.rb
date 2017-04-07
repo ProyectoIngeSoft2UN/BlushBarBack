@@ -11,13 +11,20 @@ class Appointment < ApplicationRecord
   def self.get_appointments
     select(:client_id,:employee_id,:payment,:active)
   end
-  #Falla
-  def self.get_appointments_by_employee_id(q)
-    joins(:employee)
-    .where(employees:{id: q}).group('"employee"."id"')
+
+  def self.get_appointments_by_employee_id(id)
+    includes(:employee).where(employee_id: id)
   end
-  #Falla
-  def self.get_appointments_by_client_id(q)
-    joins(:client).select(:client_id,'"clients"."name"','"clients"."lastName"',:payment,:active).where(clients:{id: q})
+
+  def self.get_appointments_by_client_id(id)
+    includes(:client).where(client_id: id)
+  end
+
+  def self.is_payment(id)
+    select(:payment).where(id: id)
+  end
+
+  def self.is_active(id)
+    select(:active).where(id: id)
   end
 end

@@ -11,4 +11,12 @@ class Image < ApplicationRecord
 	def self.get_description(id)
     select(:description).where(id: id)
   end
+
+	def self.get_products_by_id(id)
+    includes(:products).where(id: id)
+  end
+
+	def self.get_products_by_name(name)
+    includes(:products).where(name: name)
+  end
 end

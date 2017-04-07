@@ -53,4 +53,8 @@ class Product < ApplicationRecord
 	def self.get_categories_by_id(id)
 		includes(:categories).where(cc: id)
 	end
+
+	def self.get_images_by_id(id)
+		includes(:categories).where(images: id)
+	end
 end

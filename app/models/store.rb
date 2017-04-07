@@ -44,19 +44,19 @@ class Store < ApplicationRecord
     includes(:products).where(id: id)
   end
 
-  def self.get_address(id)
+  def self.get_address_of(id)
     select(:address).where(id: id)
   end
 
-  def self.get_city(id)
+  def self.get_city_of(id)
     select(:city).where(id: id)
   end
 
-  def self.get_phone(id)
+  def self.get_phone_of(id)
     select(:phone).where(id: id)
   end
 
-  def self.get_email(id)
+  def self.get_email_of(id)
     select(:email).where(id: id)
   end
 end

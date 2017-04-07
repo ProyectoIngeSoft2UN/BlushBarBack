@@ -18,8 +18,16 @@ class Purchase < ApplicationRecord
     include(:product,:cost,:payment,:description)
   end
 
-  def self.get_associated_elements_by_id(q)
+  def self.get_client_by_id(q)
     includes(:client).where(id: q)
+  end
+
+  def self.get_product_by_id(q)
+    includes(:product).where(id: q)
+  end
+
+  def self.get_purchases_by_payment(q)
+    includes(:client).where(payment: q)
   end
 
 end
