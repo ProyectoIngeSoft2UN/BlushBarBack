@@ -46,7 +46,7 @@ Category.create!(name: 'Aceite', description: Faker::Lorem.sentence)
 Client.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("clients")
 
-generateValues.times do |i|
+100.times do |i|
 	nm = Faker::Name.unique.first_name
 	lastnm = Faker::Name.unique.last_name
 	Client.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'clientpwd', phone: Faker::PhoneNumber.phone_number)
@@ -93,4 +93,25 @@ ActiveRecord::Base.connection.reset_pk_sequence!("purchases")
 
 generateValues.times do |i|
 	Purchase.create!(cost: Faker::Number.between(40000, 200000), client: Client.find(Faker::Number.between(1,generateValues)),product: Product.find(Faker::Number.between(1,10)), payment: Faker::Lorem.sentence, description: Faker::Lorem.sentence)
+end
+
+ProductsStore.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!("products_stores")
+
+generateValues.times do |i|
+  ProductsStore.create!(product_id: Faker::Number.between(1,generateValues), client_id: Faker::Number.between(1,generateValues))
+end
+
+ImagesProduct.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!("images_products")
+
+generateValues.times do |i|
+  ImagesProduct.create!(image_id: Faker::Number.between(1,generateValues), product_id: Faker::Number.between(1,generateValues))
+end
+
+CategoriesProduct.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!("categories_products")
+
+generateValues.times do |i|
+  CategoriesProduct.create!(category_id: Faker::Number.between(1,generateValues), product_id: Faker::Number.between(1,generateValues))
 end
