@@ -1,4 +1,7 @@
 class ClientsController < ApplicationController
+	def index
+		render json: Client.all, root: "data"
+	end
 
 	def list
 		@admin = Client.all
@@ -16,7 +19,7 @@ class ClientsController < ApplicationController
 		@client = Client.new(params[:client])
 		if @client.save
 			redirect_to @client
-		else 
+		else
 			render "new"
 		end
 	end
@@ -36,5 +39,5 @@ class ClientsController < ApplicationController
 		@client.destroy
 		redirect_to action: "list"
 
-	end 
+	end
 end

@@ -1,4 +1,7 @@
 class StoresController < ApplicationController
+	def index
+		render json: Sotre.all, root: "data"
+	end
 	def list
 		@store = Store.all
 	end
@@ -15,7 +18,7 @@ class StoresController < ApplicationController
 		@store = Store.new(params[:store])
 		if @store.save
 			redirect_to @store
-		else 
+		else
 			render "new"
 		end
 	end
@@ -35,5 +38,5 @@ class StoresController < ApplicationController
 		@store.destroy
 		redirect_to action: "list"
 
-	end 
+	end
 end
