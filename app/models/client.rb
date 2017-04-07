@@ -21,21 +21,20 @@ class Client < ApplicationRecord
 	def self.get_by_cc(cc)
 		select(:cc,:name,:lastName,:email,:phone).where(cc: cc)
 	end
-	#Falla
+	
 	def self.get_appointments_by_client_id(q)
-		self.joins(:appointments).select(:id,:payment).where(client_id: q)
+		includes(:appointments).where(id: q)
 	end
-	#Falla
-	def self.get_appointments_by_client_cc(q)
-		joins(:appointments).select('"appointments"."payment"','"appointments"."payment"','"appointments"."active"').where(cc: q)
+
+	def self.get_appointments_by_client_cc(cc)
+		includes(:appointments).where(cc: cc)
 	end
-	#Falla
+
 	def self.get_purchases_by_client_id(q)
-		joins(:purchase).select(:id,'"purchases"."product"','"purchases"."payment"').where(id: q)
+		includes(:purchases).where(id: q)
 	end
-	#Falla
 #joins(:purchase).select(:client_id,'"purchases"."product"','"purchases"."payment"').where(purchases:{cc: q})
-	def self.get_purchases_by_client_cc(q)
-		joins(:purchase).select(:id,'"purchases"."product"','"purchases"."payment"').where(cc: q)
+	def self.get_purchases_by_client_cc(cc)
+		includes(:purchases).where(id: cc)
 	end
 end
