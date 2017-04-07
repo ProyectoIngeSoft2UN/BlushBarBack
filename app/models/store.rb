@@ -31,10 +31,17 @@ class Store < ApplicationRecord
 	def self.get_stores
 		select(:address,:city,:phone,:email,:admin)
 	end
-  #Falla
+
   def self.get_admin_of(id)
-    puts id
-    includes(:admin).select(:id,:address,'"admins"."id", "admins"."cc", "admins"."name"').where(admin: id).references(:admins)
+    includes(:admin).where(admin: id)
+  end
+
+  def self.get_employees_of(id)
+    includes(:employees).where(id: id)
+  end
+
+  def self.get_products_in(id)
+    includes(:products).where(id: id)
   end
 
   def self.get_address(id)
