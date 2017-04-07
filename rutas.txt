@@ -1,0 +1,99 @@
+                      Prefix Verb   URI Pattern                                               Controller#Action
+                     clients GET    /clients(.:format)                                        clients#index
+                             POST   /clients(.:format)                                        clients#create
+                      client GET    /clients/:id(.:format)                                    clients#show
+                             PATCH  /clients/:id(.:format)                                    clients#update
+                             PUT    /clients/:id(.:format)                                    clients#update
+                             DELETE /clients/:id(.:format)                                    clients#destroy
+                   employees GET    /employees(.:format)                                      employees#index
+                             POST   /employees(.:format)                                      employees#create
+                    employee GET    /employees/:id(.:format)                                  employees#show
+                             PATCH  /employees/:id(.:format)                                  employees#update
+                             PUT    /employees/:id(.:format)                                  employees#update
+                             DELETE /employees/:id(.:format)                                  employees#destroy
+                      stores GET    /stores(.:format)                                         stores#index
+                             POST   /stores(.:format)                                         stores#create
+                       store GET    /stores/:id(.:format)                                     stores#show
+                             PATCH  /stores/:id(.:format)                                     stores#update
+                             PUT    /stores/:id(.:format)                                     stores#update
+                             DELETE /stores/:id(.:format)                                     stores#destroy
+                appointments GET    /appointments(.:format)                                   appointments#index
+                             POST   /appointments(.:format)                                   appointments#create
+                 appointment GET    /appointments/:id(.:format)                               appointments#show
+                             PATCH  /appointments/:id(.:format)                               appointments#update
+                             PUT    /appointments/:id(.:format)                               appointments#update
+                             DELETE /appointments/:id(.:format)                               appointments#destroy
+                admin_stores GET    /admins/:admin_id/stores(.:format)                        stores#index
+                             POST   /admins/:admin_id/stores(.:format)                        stores#create
+                 admin_store GET    /admins/:admin_id/stores/:id(.:format)                    stores#show
+                             PATCH  /admins/:admin_id/stores/:id(.:format)                    stores#update
+                             PUT    /admins/:admin_id/stores/:id(.:format)                    stores#update
+                             DELETE /admins/:admin_id/stores/:id(.:format)                    stores#destroy
+                      admins GET    /admins(.:format)                                         admins#index
+                             POST   /admins(.:format)                                         admins#create
+                       admin GET    /admins/:id(.:format)                                     admins#show
+                             PATCH  /admins/:id(.:format)                                     admins#update
+                             PUT    /admins/:id(.:format)                                     admins#update
+                             DELETE /admins/:id(.:format)                                     admins#destroy
+           clients_purchases GET    /clients/purchases(.:format)                              clients/purchases#index
+                             POST   /clients/purchases(.:format)                              clients/purchases#create
+            clients_purchase GET    /clients/purchases/:id(.:format)                          clients/purchases#show
+                             PATCH  /clients/purchases/:id(.:format)                          clients/purchases#update
+                             PUT    /clients/purchases/:id(.:format)                          clients/purchases#update
+                             DELETE /clients/purchases/:id(.:format)                          clients/purchases#destroy
+        clients_appointments GET    /clients/appointments(.:format)                           clients/appointments#index
+                             POST   /clients/appointments(.:format)                           clients/appointments#create
+         clients_appointment GET    /clients/appointments/:id(.:format)                       clients/appointments#show
+                             PATCH  /clients/appointments/:id(.:format)                       clients/appointments#update
+                             PUT    /clients/appointments/:id(.:format)                       clients/appointments#update
+                             DELETE /clients/appointments/:id(.:format)                       clients/appointments#destroy
+       employee_appointments GET    /employee/:employee_id/appointments(.:format)             appointments#index
+                             POST   /employee/:employee_id/appointments(.:format)             appointments#create
+        employee_appointment GET    /employee/:employee_id/appointments/:id(.:format)         appointments#show
+                             PATCH  /employee/:employee_id/appointments/:id(.:format)         appointments#update
+                             PUT    /employee/:employee_id/appointments/:id(.:format)         appointments#update
+                             DELETE /employee/:employee_id/appointments/:id(.:format)         appointments#destroy
+              employee_index GET    /employee(.:format)                                       employee#index
+                             POST   /employee(.:format)                                       employee#create
+                             GET    /employee/:id(.:format)                                   employee#show
+                             PATCH  /employee/:id(.:format)                                   employee#update
+                             PUT    /employee/:id(.:format)                                   employee#update
+                             DELETE /employee/:id(.:format)                                   employee#destroy
+       stores_product_stores GET    /stores/products/:product_id/stores(.:format)             stores/stores#index
+                             POST   /stores/products/:product_id/stores(.:format)             stores/stores#create
+        stores_product_store GET    /stores/products/:product_id/stores/:id(.:format)         stores/stores#show
+                             PATCH  /stores/products/:product_id/stores/:id(.:format)         stores/stores#update
+                             PUT    /stores/products/:product_id/stores/:id(.:format)         stores/stores#update
+                             DELETE /stores/products/:product_id/stores/:id(.:format)         stores/stores#destroy
+       stores_product_images GET    /stores/products/:product_id/images(.:format)             stores/images#index
+                             POST   /stores/products/:product_id/images(.:format)             stores/images#create
+        stores_product_image GET    /stores/products/:product_id/images/:id(.:format)         stores/images#show
+                             PATCH  /stores/products/:product_id/images/:id(.:format)         stores/images#update
+                             PUT    /stores/products/:product_id/images/:id(.:format)         stores/images#update
+                             DELETE /stores/products/:product_id/images/:id(.:format)         stores/images#destroy
+   stores_product_categories GET    /stores/products/:product_id/categories(.:format)         stores/categories#index
+                             POST   /stores/products/:product_id/categories(.:format)         stores/categories#create
+     stores_product_category GET    /stores/products/:product_id/categories/:id(.:format)     stores/categories#show
+                             PATCH  /stores/products/:product_id/categories/:id(.:format)     stores/categories#update
+                             PUT    /stores/products/:product_id/categories/:id(.:format)     stores/categories#update
+                             DELETE /stores/products/:product_id/categories/:id(.:format)     stores/categories#destroy
+              stores_product GET    /stores/products/:id(.:format)                            stores/products#show
+stores_employee_appointments GET    /stores/employees/:employee_id/appointments(.:format)     stores/appointments#index
+                             POST   /stores/employees/:employee_id/appointments(.:format)     stores/appointments#create
+ stores_employee_appointment GET    /stores/employees/:employee_id/appointments/:id(.:format) stores/appointments#show
+                             PATCH  /stores/employees/:employee_id/appointments/:id(.:format) stores/appointments#update
+                             PUT    /stores/employees/:employee_id/appointments/:id(.:format) stores/appointments#update
+                             DELETE /stores/employees/:employee_id/appointments/:id(.:format) stores/appointments#destroy
+            stores_employees GET    /stores/employees(.:format)                               stores/employees#index
+                             POST   /stores/employees(.:format)                               stores/employees#create
+             stores_employee GET    /stores/employees/:id(.:format)                           stores/employees#show
+                             PATCH  /stores/employees/:id(.:format)                           stores/employees#update
+                             PUT    /stores/employees/:id(.:format)                           stores/employees#update
+                             DELETE /stores/employees/:id(.:format)                           stores/employees#destroy
+            category_product GET    /categories/:category_id/products/:id(.:format)           products#show
+                  categories GET    /categories(.:format)                                     categories#index
+                             POST   /categories(.:format)                                     categories#create
+                    category GET    /categories/:id(.:format)                                 categories#show
+                             PATCH  /categories/:id(.:format)                                 categories#update
+                             PUT    /categories/:id(.:format)                                 categories#update
+                             DELETE /categories/:id(.:format)                                 categories#destroy
