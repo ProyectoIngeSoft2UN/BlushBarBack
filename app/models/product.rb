@@ -10,8 +10,9 @@ class Product < ApplicationRecord
 	#validates :quantity, numericality: true, presence: {message: 'El cosot no debe ser vacio'}
 	#validates_associated :Purchases
 
-	def self.get_products
+	def self.get_products(page = 1, per_page = 10)
 		select(:name,:description,:cost,:quantity,:available)
+		.paginate(:page => page,:per_page => per_page)
 	end
 
 	def self.is_available_by_name(q)

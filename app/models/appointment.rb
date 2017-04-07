@@ -8,8 +8,9 @@ class Appointment < ApplicationRecord
   validates :active, inclusion: { in: [true, false], message: 'Debe ser true o false'}
   #validates :dateTime,
 
-  def self.get_appointments
+  def self.get_appointments(page = 1, per_page = 10)
     select(:client_id,:employee_id,:payment,:active)
+    .paginate(:page => page,:per_page => per_page)
   end
 
   def self.get_appointments_by_employee_id(id)

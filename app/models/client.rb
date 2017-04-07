@@ -11,9 +11,11 @@ class Client < ApplicationRecord
 	validates :phone, presence: true, allow_blank: true
 	#validates :phone, presence: true,  format: { with:  /[0-9]*/, message: "Phone must be a number" }
 
-	def self.get_clients
+	def self.get_clients(page = 1, per_page = 10)
 		select(:cc,:name,:lastName,:email,:phone)
+		.paginate(:page => page,:per_page => per_page)
 	end
+
 	def self.get_by_id(id)
 		select(:cc,:name,:lastName,:email,:phone).where(id: id)
 	end

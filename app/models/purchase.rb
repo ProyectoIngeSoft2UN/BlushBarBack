@@ -10,8 +10,9 @@ class Purchase < ApplicationRecord
   #validates_associated :client
   #validates_associated :products
 
-  def self.get_purchases
+  def self.get_purchases(page = 1, per_page = 10)
     select(:cost,:client,:product,:payment,:description)
+    .paginate(:page => page,:per_page => per_page)
   end
 
   def self.get_purchases_products
