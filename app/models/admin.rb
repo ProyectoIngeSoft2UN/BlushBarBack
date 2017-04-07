@@ -21,4 +21,12 @@ class Admin < ApplicationRecord
 	def self.get_by_cc(cc)
 		select(:cc,:name,:lastName,:email,:phone).where(cc: cc)
 	end
+
+	def self.get_store_by_id(id)
+		includes(:store).where(id: id)
+	end
+
+	def self.get_store_by_cc(cc)
+		includes(:store).where(cc: cc)
+	end
 end

@@ -1,6 +1,7 @@
 class Employee < ApplicationRecord
   has_secure_password
   belongs_to :store
+  has_many :clients, through: :appointments
   has_many :appointments
 
   validates :cc, presence: true
@@ -22,4 +23,11 @@ class Employee < ApplicationRecord
     select(:cc,:name,:lastName,:email,:phone,:store).where(cc: cc)
   end
 
+  def self.get_appointments_by_employee_id(q)
+    includes(:appointments).where(id: q)
+  end
+
+  def self.get_appointments_by_employee_cc(cc)
+    includes(:appointments).where(cc: cc)
+  end
 end

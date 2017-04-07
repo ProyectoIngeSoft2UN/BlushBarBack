@@ -45,4 +45,12 @@ class Product < ApplicationRecord
 	def self.get_description_by_id(q)
 		select(:description).where(id: q)
 	end
+
+	def self.get_appointments_by_client_id(q)
+		includes(:appointments).where(id: q)
+	end
+
+	def self.get_categories_by_id(id)
+		includes(:categories).where(cc: id)
+	end
 end
