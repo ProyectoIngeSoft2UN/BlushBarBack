@@ -5,7 +5,6 @@ one:
   name: MyString
   lastName: MyString
   email: MyString
-  password_digest: MyString
   phone: MyString
   store: one
 
@@ -14,6 +13,5 @@ two:
   name: MyString
   lastName: MyString
   email: MyString
-  password_digest: MyString
   phone: MyString
   store: two

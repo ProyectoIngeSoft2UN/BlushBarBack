@@ -1,4 +1,7 @@
 class AppointmentsController < ApplicationController
+	def index
+		render json: Appointment.all, root: "data"
+	end
 	def list
 		@appointment = Appointment.all
 	end
@@ -15,7 +18,7 @@ class AppointmentsController < ApplicationController
 		@appointment = Appointment.new(params[:appointment])
 		if @appointment.save
 			redirect_to @Appointment
-		else 
+		else
 			render "new"
 		end
 	end
@@ -35,5 +38,5 @@ class AppointmentsController < ApplicationController
 		@appointment.destroy
 		redirect_to action: "list"
 
-	end 
+	end
 end

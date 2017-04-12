@@ -1,7 +1,5 @@
 class Employee < ApplicationRecord
-  has_secure_password
   belongs_to :store
-  has_many :clients, through: :appointments
   has_many :appointments
 
   validates :cc, presence: true

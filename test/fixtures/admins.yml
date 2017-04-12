@@ -5,7 +5,6 @@ one:
   name: MyString
   lastName: MyString
   email: MyString
-  password_digest: MyString
   phone: MyString
 
 two:
@@ -13,5 +12,4 @@ two:
   name: MyString
   lastName: MyString
   email: MyString
-  password_digest: MyString
   phone: MyString

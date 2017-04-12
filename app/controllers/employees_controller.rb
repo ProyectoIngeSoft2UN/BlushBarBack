@@ -1,4 +1,7 @@
 class EmployeesController < ApplicationController
+	def index
+		render json: Employee.all, root: "data"
+	end
 	def list
 		@employee = Employee.all
 	end
@@ -15,7 +18,7 @@ class EmployeesController < ApplicationController
 		@employee = employee.new(params[:employee])
 		if @employee.save
 			redirect_to @Employee
-		else 
+		else
 			render "new"
 		end
 	end
@@ -35,5 +38,5 @@ class EmployeesController < ApplicationController
 		@employee.destroy
 		redirect_to action: "list"
 
-	end 
+	end
 end

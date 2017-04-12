@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  product: one
-  category: one
+  name: MyString
+  description: MyText
+  cost: 1
 
 two:
-  product: two
-  category: two
+  name: MyString
+  description: MyText
+  cost: 1
