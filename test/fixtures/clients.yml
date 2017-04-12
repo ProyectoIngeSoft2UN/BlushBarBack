@@ -5,13 +5,15 @@ one:
   name: MyString
   lastName: MyString
   email: MyString
-  password_digest: MyString
   phone: MyString
+  address: MyString
+  city: MyString
 
 two:
   cc: MyString
   name: MyString
   lastName: MyString
   email: MyString
-  password_digest: MyString
   phone: MyString
+  address: MyString
+  city: MyString

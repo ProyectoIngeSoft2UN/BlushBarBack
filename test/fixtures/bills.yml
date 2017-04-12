@@ -3,13 +3,13 @@
 one:
   cost: 1
   client: one
-  product: one
-  payment: MyString
+  store: one
+  payment_method: MyString
   description: MyText
 
 two:
   cost: 1
   client: two
-  product: two
-  payment: MyString
+  store: two
+  payment_method: MyString
   description: MyText
