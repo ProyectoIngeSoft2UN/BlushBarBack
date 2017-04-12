@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+	def index
+		render json: Category.all, root: "data"
+	end
 	def list
 		@category = Category.all
 	end
@@ -15,7 +18,7 @@ class CategoriesController < ApplicationController
 		@category = Category.new(params[:category])
 		if @admin.save
 			redirect_to @Admin
-		else 
+		else
 			render "new"
 		end
 	end
@@ -35,5 +38,5 @@ class CategoriesController < ApplicationController
 		@category.destroy
 		redirect_to action: "list"
 
-	end 
+	end
 end

@@ -4,12 +4,12 @@ one:
   address: MyString
   city: MyString
   phone: MyString
-  email: MyString
   admin: one
+  email: MyString
 
 two:
   address: MyString
   city: MyString
   phone: MyString
-  email: MyString
   admin: two
+  email: MyString

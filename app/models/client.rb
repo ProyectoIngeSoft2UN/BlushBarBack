@@ -1,7 +1,5 @@
 class Client < ApplicationRecord
-	has_secure_password
-	has_many :purchases
-	has_many :employees, through: :appointments
+	has_many :bills
 	has_many :appointments
 
 	validates :cc, presence: true

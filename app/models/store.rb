@@ -1,7 +1,9 @@
 class Store < ApplicationRecord
   belongs_to :admin
+  has_many :bills
+  has_many :stock_stores
   has_many :employees
-  has_and_belongs_to_many :products
+  has_many :appointments
 
   validates :address, presence: {message: 'La direccion no debe ser vacia'}
   validates :city, presence: {message: 'La ciudad no debe ser vacia'}
@@ -38,10 +40,6 @@ class Store < ApplicationRecord
 
   def self.get_employees_of(id)
     includes(:employees).where(id: id)
-  end
-
-  def self.get_products_in(id)
-    includes(:products).where(id: id)
   end
 
   def self.get_address_of(id)

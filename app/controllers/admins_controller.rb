@@ -1,7 +1,12 @@
 class AdminsController < ApplicationController
-	
+
+	def index
+		render json: Admin.all
+	end
+
 	def list
 		@admin = Admin.all
+
 	end
 
 	def show
@@ -16,7 +21,7 @@ class AdminsController < ApplicationController
 		@admin = Admin.new(params[:admin])
 		if @admin.save
 			redirect_to @Admin
-		else 
+		else
 			render "new"
 		end
 	end
@@ -36,6 +41,6 @@ class AdminsController < ApplicationController
 		@admin.destroy
 		redirect_to action: "list"
 
-	end 
+	end
 
 end

@@ -1,4 +1,7 @@
 class PurchasesController < ApplicationController
+	def index
+		render json: Purchase.all, root: "data"
+	end
 	def list
 		@purchase = Purchase.all
 	end
@@ -15,7 +18,7 @@ class PurchasesController < ApplicationController
 		@purchase = Purchase.new(params[:purchase])
 		if @purchase.save
 			redirect_to @purchase
-		else 
+		else
 			render "new"
 		end
 	end
@@ -35,5 +38,5 @@ class PurchasesController < ApplicationController
 		@purchase.destroy
 		redirect_to action: "list"
 
-	end 
+	end
 end

@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+	def index
+		render json: Product.all, root: "data"
+	end
 	def list
 		@product = Product.all
 	end
@@ -15,7 +18,7 @@ class ProductsController < ApplicationController
 		@product = Product.new(params[:product])
 		if @product.save
 			redirect_to @product
-		else 
+		else
 			render "new"
 		end
 	end
@@ -35,5 +38,5 @@ class ProductsController < ApplicationController
 		@product.destroy
 		redirect_to action: "list"
 
-	end 
+	end
 end

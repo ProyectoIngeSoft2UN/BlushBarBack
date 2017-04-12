@@ -3,11 +3,17 @@
 one:
   client: one
   employee: one
-  payment: false
+  store: one
+  service: one
+  is_paid: false
   active: false
+  dateTime: 2017-04-12 11:49:33
 
 two:
   client: two
   employee: two
-  payment: false
+  store: two
+  service: two
+  is_paid: false
   active: false
+  dateTime: 2017-04-12 11:49:33
