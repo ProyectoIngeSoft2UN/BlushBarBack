@@ -10,17 +10,30 @@ class Appointment < ApplicationRecord
   validates :active, inclusion: { in: [true, false], message: 'Debe ser true o false'}
   #validates :dateTime,
 
-  def self.get_appointments(page = 1, per_page = 10)
+  def self.get_appointments(page, per_page)
     select(:client_id,:employee_id,:payment,:active)
+    .paginate(:page => page,:per_page => per_page)
+    #.paginate(:page => params[:page],:per_page => per_page)
+  end
+
+  def self.get_appointments_by_employee_id(id,page,per_page)
+    includes(:employee).where(employee_id: id)
     .paginate(:page => page,:per_page => per_page)
   end
 
-  def self.get_appointments_by_employee_id(id)
-    includes(:employee).where(employee_id: id)
+  def self.get_appointments_by_client_id(id,page,per_page)
+    includes(:client).where(client_id: id)
+    .paginate(:page => page,:per_page => per_page)
   end
 
-  def self.get_appointments_by_client_id(id)
-    includes(:client).where(client_id: id)
+  def self.get_appointments_by_store_id(id,page,per_page)
+    includes(:store).where(store_id: id)
+    .paginate(:page => page,:per_page => per_page)
+  end
+
+  def self.get_appointments_by_service_id(id,page,per_page)
+    includes(:service).where(service_id: id)
+    .paginate(:page => page,:per_page => per_page)
   end
 
   def self.is_payment(id)
@@ -29,5 +42,9 @@ class Appointment < ApplicationRecord
 
   def self.is_active(id)
     select(:active).where(id: id)
+  end
+
+  def self.get_dateTime(id)
+    select(:dateTime).where(id: id)
   end
 end

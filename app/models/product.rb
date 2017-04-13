@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :category
-  has_many :stock_stores
+  has_many :stockstores
   has_and_belongs_to_many :bills
   has_and_belongs_to_many :images
 
@@ -9,25 +9,9 @@ class Product < ApplicationRecord
 	validates :cost, numericality: true, presence: {message: 'El cosot no debe ser vacio'}
 	#validates :quantity, numericality: true, presence: {message: 'El cosot no debe ser vacio'}
 
-	def self.get_products(page = 1, per_page = 10)
+	def self.get_products(page, per_page)
 		select(:name,:description,:cost,:quantity,:available)
 		.paginate(:page => page,:per_page => per_page)
-	end
-
-	def self.is_available_by_name(q)
-		select(:available).where(name: q)
-	end
-
-	def self.is_available_by_id(q)
-		select(:available).where(id: q)
-	end
-
-	def self.get_quantity_by_name(q)
-		select(:quantity).where(name: q)
-	end
-
-	def self.get_quantity_by_id(q)
-		select(:quantity).where(id: q)
 	end
 
 	def self.get_cost_by_name(q)
@@ -46,15 +30,27 @@ class Product < ApplicationRecord
 		select(:description).where(id: q)
 	end
 
-	def self.get_appointments_by_client_id(q)
-		includes(:appointments).where(id: q)
+	def self.get_bills_by_id(id)
+		includes(:bills).where(id: id)
+	end
+
+  def self.get_bills_by_name(name)
+		includes(:bills).where(name: name)
 	end
 
 	def self.get_categories_by_id(id)
-		includes(:categories).where(cc: id)
+		includes(:category).where(id: id)
+	end
+
+  def self.get_categories_by_name(name)
+		includes(:category).where(name: name)
 	end
 
 	def self.get_images_by_id(id)
-		includes(:categories).where(images: id)
+		includes(:images).where(id: id)
+	end
+
+  def self.get_images_by_name(name)
+		includes(:images).where(name: name)
 	end
 end

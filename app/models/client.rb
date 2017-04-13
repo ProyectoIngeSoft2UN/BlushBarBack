@@ -7,9 +7,11 @@ class Client < ApplicationRecord
 	validates :lastName,  presence: true, format: { with: /[a-z ,.'-]+/i, message: "LastName must be string" }
 	validates :email, presence: true, format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
 	validates :phone, presence: true, allow_blank: true
+	validates :address
+	validates :city
 	#validates :phone, presence: true,  format: { with:  /[0-9]*/, message: "Phone must be a number" }
 
-	def self.get_clients(page = 1, per_page = 10)
+	def self.get_clients(page, per_page)
 		select(:cc,:name,:lastName,:email,:phone)
 		.paginate(:page => page,:per_page => per_page)
 	end
@@ -54,6 +56,22 @@ class Client < ApplicationRecord
 		select(:phone).where(cc: cc)
 	end
 
+	def self.get_city_by_id(id)
+		select(:city).where(id: id)
+	end
+
+	def self.get_city_by_cc(cc)
+		select(:city).where(cc: cc)
+	end
+
+	def self.get_address_by_id(id)
+		select(:address).where(id: id)
+	end
+
+	def self.get_address_by_id(cc)
+		select(:address).where(cc: cc)
+	end
+
 	def self.get_appointments_by_client_id(q)
 		includes(:appointments).where(id: q)
 	end
@@ -62,11 +80,11 @@ class Client < ApplicationRecord
 		includes(:appointments).where(cc: cc)
 	end
 
-	def self.get_purchases_by_client_id(q)
-		includes(:purchases).where(id: q)
+	def self.get_bills_by_client_id(q)
+		includes(:bills).where(id: q)
 	end
 #joins(:purchase).select(:client_id,'"purchases"."product"','"purchases"."payment"').where(purchases:{cc: q})
-	def self.get_purchases_by_client_cc(cc)
-		includes(:purchases).where(id: cc)
+	def self.get_bills_by_client_cc(cc)
+		includes(:bills).where(id: cc)
 	end
 end
