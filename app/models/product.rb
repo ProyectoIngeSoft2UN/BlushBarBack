@@ -6,8 +6,8 @@ class Product < ApplicationRecord
 
   validates :name, presence: {message: 'Nombre no debe ser vacio'}
 	validates :description, presence: {message: 'Descripcion no debe ser vacia'}
-	validates :cost, numericality: true, presence: {message: 'El cosot no debe ser vacio'}
-	#validates :quantity, numericality: true, presence: {message: 'El cosot no debe ser vacio'}
+	validates :cost, numericality: true, presence: {message: 'El costo no debe ser vacio'}
+	validates :category_id , numericality: { only_integer: true}, presence: true
 
 	def self.get_products(page = 1, per_page = 10)
 		select(:name,:description,:cost,:quantity,:available)
