@@ -2,8 +2,8 @@ class Stockstore < ApplicationRecord
   belongs_to :product
   belongs_to :store
 
-  validates :available
-  validates :quantity
+  validates :available, inclusion: { in: [true, false], message: 'Debe ser true o false'}
+  validates :quantity, presence: true
 
   def self.is_available_by_id(q)
     select(:available).where(id: q)

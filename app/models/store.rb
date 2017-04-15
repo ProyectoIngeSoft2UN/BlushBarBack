@@ -10,7 +10,7 @@ class Store < ApplicationRecord
   validates :city, presence: {message: 'La ciudad no debe ser vacia'}
   validates :phone, presence: {message: 'El telefono no debe ser vacio'}
   validates :email, presence: {message: 'El correo no debe ser vacio'}, format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
-  validates :admin, presence: {message: 'El IdAdmin no debe ser vacio'}
+  # validates :admin_id, presence: {message: 'El IdAdmin no debe ser vacio'}
   #validates_associated :employees
 	#validates_associated :products
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412165011) do
+ActiveRecord::Schema.define(version: 20170413193020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,19 @@ ActiveRecord::Schema.define(version: 20170412165011) do
     t.string   "lastName"
     t.string   "email"
     t.string   "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "appointments", force: :cascade do |t|
@@ -41,15 +52,6 @@ ActiveRecord::Schema.define(version: 20170412165011) do
     t.index ["store_id"], name: "index_appointments_on_store_id", using: :btree
   end
 
-  create_table "bill_products", force: :cascade do |t|
-    t.integer  "bill_id"
-    t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bill_id"], name: "index_bill_products_on_bill_id", using: :btree
-    t.index ["product_id"], name: "index_bill_products_on_product_id", using: :btree
-  end
-
   create_table "bills", force: :cascade do |t|
     t.integer  "cost"
     t.integer  "client_id"
@@ -60,6 +62,15 @@ ActiveRecord::Schema.define(version: 20170412165011) do
     t.datetime "updated_at",     null: false
     t.index ["client_id"], name: "index_bills_on_client_id", using: :btree
     t.index ["store_id"], name: "index_bills_on_store_id", using: :btree
+  end
+
+  create_table "bills_products", force: :cascade do |t|
+    t.integer  "bill_id"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bill_id"], name: "index_bills_products_on_bill_id", using: :btree
+    t.index ["product_id"], name: "index_bills_products_on_product_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -77,8 +88,19 @@ ActiveRecord::Schema.define(version: 20170412165011) do
     t.string   "phone"
     t.string   "address"
     t.string   "city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "employees", force: :cascade do |t|
@@ -88,18 +110,20 @@ ActiveRecord::Schema.define(version: 20170412165011) do
     t.string   "email"
     t.string   "phone"
     t.integer  "store_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
     t.index ["store_id"], name: "index_employees_on_store_id", using: :btree
-  end
-
-  create_table "image_products", force: :cascade do |t|
-    t.integer  "image_id"
-    t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["image_id"], name: "index_image_products_on_image_id", using: :btree
-    t.index ["product_id"], name: "index_image_products_on_product_id", using: :btree
   end
 
   create_table "images", force: :cascade do |t|
@@ -107,6 +131,15 @@ ActiveRecord::Schema.define(version: 20170412165011) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "images_products", force: :cascade do |t|
+    t.integer  "image_id"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_images_products_on_image_id", using: :btree
+    t.index ["product_id"], name: "index_images_products_on_product_id", using: :btree
   end
 
   create_table "products", force: :cascade do |t|
@@ -153,13 +186,13 @@ ActiveRecord::Schema.define(version: 20170412165011) do
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
   add_foreign_key "appointments", "stores"
-  add_foreign_key "bill_products", "bills"
-  add_foreign_key "bill_products", "products"
   add_foreign_key "bills", "clients"
   add_foreign_key "bills", "stores"
+  add_foreign_key "bills_products", "bills"
+  add_foreign_key "bills_products", "products"
   add_foreign_key "employees", "stores"
-  add_foreign_key "image_products", "images"
-  add_foreign_key "image_products", "products"
+  add_foreign_key "images_products", "images"
+  add_foreign_key "images_products", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "stockstores", "products"
   add_foreign_key "stockstores", "stores"

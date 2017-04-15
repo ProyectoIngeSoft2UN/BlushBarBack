@@ -4,14 +4,14 @@ class Appointment < ApplicationRecord
   belongs_to :store
   belongs_to :service
 
-  validates :client, presence: {message: 'IdCliente no debe ser vacio'}
-  validates :employee, presence: {message: 'IdEmployee no debe ser vacio'}
-  validates :payment, inclusion: { in: [true, false], message: 'Debe ser true o false'}
+  # validates :client_id, presence: {message: 'IdCliente no debe ser vacio'}
+  # validates :employee_id, presence: {message: 'IdEmployee no debe ser vacio'}
+  validates :is_paid, inclusion: { in: [true, false], message: 'Debe ser true o false'}
   validates :active, inclusion: { in: [true, false], message: 'Debe ser true o false'}
   #validates :dateTime,
 
   def self.get_appointments(page, per_page)
-    select(:client_id,:employee_id,:payment,:active)
+    select(:client_id,:employee_id,:id_paid,:active)
     .paginate(:page => page,:per_page => per_page)
     #.paginate(:page => params[:page],:per_page => per_page)
   end
@@ -36,8 +36,8 @@ class Appointment < ApplicationRecord
     .paginate(:page => page,:per_page => per_page)
   end
 
-  def self.is_payment(id)
-    select(:payment).where(id: id)
+  def self.is_paid(id)
+    select(:id_paid).where(id: id)
   end
 
   def self.is_active(id)

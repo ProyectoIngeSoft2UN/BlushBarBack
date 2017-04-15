@@ -1,4 +1,4 @@
-class ImageProduct < ApplicationRecord
+class ImagesProduct < ApplicationRecord
   belongs_to :product
   belongs_to :image
 

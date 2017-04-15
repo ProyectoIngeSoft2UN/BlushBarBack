@@ -1,9 +1,9 @@
 class Service < ApplicationRecord
 	has_many :appointments
 
-	validates :name, :description, presence: true
-	validates :description
-	validates :cost
+	validates :name, presence: true
+	validates :description, presence: true
+	validates :cost, presence: true
 
 	def self.get_services(page,per_page)
 		select(:name,:description,:cost)

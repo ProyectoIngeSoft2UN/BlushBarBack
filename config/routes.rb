@@ -29,8 +29,10 @@ Rails.application.routes.draw do
   	end
   end
 
+  resources :images
+  # resources :products
   resources :categories do
-  	resources :products, only: [:list, :show]
+  	resources :products, only: [:index, :show]
   end
 
 end
