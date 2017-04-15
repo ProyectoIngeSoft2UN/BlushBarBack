@@ -1,4 +1,8 @@
 class Employee < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
   belongs_to :store
   has_many :appointments
 
@@ -9,7 +13,7 @@ class Employee < ApplicationRecord
   validates :phone, presence: true,  format: { with:  /[0-9]*/, message: "Phone must be a number" }
   #validates_associated :appointments
 
-  def self.get_employees(page = 1, per_page = 10)
+  def self.get_employees(page, per_page)
     select(:cc,:name,:lastName,:email,:phone,:store_id)
     .paginate(:page => page,:per_page => per_page)
   end

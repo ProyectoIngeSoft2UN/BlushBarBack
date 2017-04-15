@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 		render json: Product.all, root: "data"
 	end
 	def list
-		@product = Product.all
+		Product.index
 	end
 
 	def show

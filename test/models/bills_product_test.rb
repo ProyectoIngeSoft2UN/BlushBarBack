@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BillProductTest < ActiveSupport::TestCase
+class BillsProductTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

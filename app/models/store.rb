@@ -1,19 +1,20 @@
 class Store < ApplicationRecord
   belongs_to :admin
   has_many :bills
-  has_many :stock_stores
+  has_many :stockstores
   has_many :employees
   has_many :appointments
+  has_many :products, through: :stockstores
 
   validates :address, presence: {message: 'La direccion no debe ser vacia'}
   validates :city, presence: {message: 'La ciudad no debe ser vacia'}
   validates :phone, presence: {message: 'El telefono no debe ser vacio'}
   validates :email, presence: {message: 'El correo no debe ser vacio'}, format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
-  validates :admin, presence: {message: 'El IdAdmin no debe ser vacio'}
+  # validates :admin_id, presence: {message: 'El IdAdmin no debe ser vacio'}
   #validates_associated :employees
 	#validates_associated :products
 
-  def self.get_stores(page = 1, paginate = 10)
+  def self.get_stores(page, paginate)
 		select(:address,:city,:phone,:email,:admin)
     .paginate(:page => page,:per_page => per_page)
 	end
@@ -22,16 +23,16 @@ class Store < ApplicationRecord
     where(city: city)
   end
 
-  def self.get_by_address(city)
-    where(address: city)
+  def self.get_by_address(address)
+    where(address: address)
   end
 
-  def self.get_by_email(city)
-    where(email: city)
+  def self.get_by_email(email)
+    where(email: email)
   end
 
-  def self.get_by_phone(city)
-    where(phone: city)
+  def self.get_by_phone(phone)
+    where(phone: phone)
   end
 
   def self.get_admin_of(id)
@@ -56,5 +57,9 @@ class Store < ApplicationRecord
 
   def self.get_email_of(id)
     select(:email).where(id: id)
+  end
+
+  def self.get_available_of(productid)
+    includes(:stockstores).select(:available).where(product_id: productid, store_id: :id)
   end
 end

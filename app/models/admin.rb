@@ -1,4 +1,8 @@
 class Admin < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 	has_one :store
 
 	validates :cc, presence: true
@@ -7,7 +11,7 @@ class Admin < ApplicationRecord
 	validates :email, presence: true, format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
 	validates :phone, presence: true,  format: { with:  /[0-9]*/, message: "Phone must be a number" }
 
-	def self.load_admins(page = 1, per_page = 10)
+	def self.load_admins(page, per_page)
 		select(:cc,:name,:lastName,:email,:phone)
 		.paginate(:page => page,:per_page => per_page)
 	end

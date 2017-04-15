@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  devise_for :employees
+  devise_for :clients
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # root 'welcome#index'
   resources :clients, :employees, :stores, :appointments
   #resources :admins
   #root to: 'admins#index'
@@ -25,8 +29,10 @@ Rails.application.routes.draw do
   	end
   end
 
+  resources :images
+  # resources :products
   resources :categories do
-  	resources :products, only: [:list, :show]
+  	resources :products, only: [:index, :show]
   end
 
 end
