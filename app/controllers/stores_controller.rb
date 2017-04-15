@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
 	def index
-		render json: Sotre.all, root: "data"
+		render json: Store.all, root: "data"
 	end
 	def list
 		@store = Store.all
