@@ -2,6 +2,9 @@ class ImagesProduct < ApplicationRecord
   belongs_to :product
   belongs_to :image
 
+  validates :image_id , numericality: { only_integer: true}, presence: true
+  validates :product_id , numericality: { only_integer: true}, presence: true
+
   def self.get_images_products(page,per_page)
     select(:product_id,:image_id)
     .paginate(:page => page,:per_page => per_page)

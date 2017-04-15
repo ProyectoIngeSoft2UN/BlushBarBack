@@ -4,8 +4,10 @@ class Appointment < ApplicationRecord
   belongs_to :store
   belongs_to :service
 
-  # validates :client_id, presence: {message: 'IdCliente no debe ser vacio'}
-  # validates :employee_id, presence: {message: 'IdEmployee no debe ser vacio'}
+  validates :client_id, presence: {message: 'IdCliente no debe ser vacio'}, numericality: { only_integer: true}
+  validates :employee_id, presence: {message: 'IdEmployee no debe ser vacio'}, numericality: { only_integer: true}
+  validates :store_id, :service_id, presence: true, numericality: { only_integer: true}
+  validates :dateTime,  presence: true
   validates :is_paid, inclusion: { in: [true, false], message: 'Debe ser true o false'}
   validates :active, inclusion: { in: [true, false], message: 'Debe ser true o false'}
   #validates :dateTime,

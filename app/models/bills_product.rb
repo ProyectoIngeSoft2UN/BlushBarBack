@@ -2,8 +2,8 @@ class BillsProduct < ApplicationRecord
   belongs_to :bill
   belongs_to :product
 
-  validates :bill, presence: {message: 'IdBill no debe ser vacio'}
-  validates :product, presence: {message: 'idProduct no debe ser vacio'}
+  validates :bill_id , numericality: { only_integer: true}, presence: true
+  validates :product_id , numericality: { only_integer: true}, presence: true
 
   def self.get_bill_products(page,per_page)
     select(:bill_id, :product_id)

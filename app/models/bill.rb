@@ -3,9 +3,6 @@ class Bill < ApplicationRecord
   belongs_to :store
   has_and_belongs_to_many :products
 
-  validates :cost, numericality: {greater_than_or_equal_to: 0}
-  validates :payment_method, presence: true
-  validates :description, presence: true
 
   def self.get_bills(page,per_page)
     select(:cost,:client_id,:store_id,:payment_method,:description)
@@ -37,4 +34,7 @@ class Bill < ApplicationRecord
     .paginate(:page => page,:per_page => per_page)
   end
 
+  validates :payment_method, presence: {message: 'Debe especificar el método de pago'}
+  validates :description, presence: {message: 'Debe especificar una descripcion'}
+  validates :cost, :client_id, :store_id , presence: true,numericality: { only_integer: true}
 end

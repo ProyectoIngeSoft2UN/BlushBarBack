@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   end
 
   create_table "appointments", force: :cascade do |t|
-    t.integer  "client_id"
-    t.integer  "employee_id"
-    t.integer  "store_id"
-    t.integer  "service_id"
-    t.boolean  "is_paid"
-    t.boolean  "active"
-    t.datetime "dateTime"
+    t.integer  "client_id",   null: false
+    t.integer  "employee_id", null: false
+    t.integer  "store_id",    null: false
+    t.integer  "service_id",  null: false
+    t.boolean  "is_paid",     null: false
+    t.boolean  "active",      null: false
+    t.datetime "dateTime",    null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["client_id"], name: "index_appointments_on_client_id", using: :btree
@@ -53,11 +53,11 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   end
 
   create_table "bills", force: :cascade do |t|
-    t.integer  "cost"
-    t.integer  "client_id"
-    t.integer  "store_id"
-    t.string   "payment_method"
-    t.text     "description"
+    t.integer  "cost",           null: false
+    t.integer  "client_id",      null: false
+    t.integer  "store_id",       null: false
+    t.string   "payment_method", null: false
+    t.text     "description",    null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["client_id"], name: "index_bills_on_client_id", using: :btree
@@ -74,19 +74,21 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
+    t.string   "name",        null: false
+    t.string   "string",      null: false
+    t.text     "description", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "cc"
-    t.string   "name"
-    t.string   "lastName"
-    t.string   "email"
-    t.string   "phone"
+    t.string   "cc",         null: false
+    t.string   "name",       null: false
+    t.string   "lastName",   null: false
+    t.string   "email",      null: false
+    t.string   "phone",      null: false
     t.string   "address"
+    t.string   "string"
     t.string   "city"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
@@ -127,8 +129,9 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string   "path"
-    t.text     "description"
+    t.string   "path",        null: false
+    t.string   "string",      null: false
+    t.text     "description", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -143,28 +146,28 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "category_id"
-    t.integer  "cost"
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.integer  "category_id", null: false
+    t.integer  "cost",        null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
   end
 
   create_table "services", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "cost"
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.integer  "cost",        null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "stockstores", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "store_id"
-    t.boolean  "available"
-    t.integer  "quantity"
+    t.integer  "product_id", null: false
+    t.integer  "store_id",   null: false
+    t.boolean  "available",  null: false
+    t.integer  "quantity",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_stockstores_on_product_id", using: :btree
@@ -172,11 +175,11 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   end
 
   create_table "stores", force: :cascade do |t|
-    t.string   "address"
-    t.string   "city"
-    t.string   "phone"
-    t.integer  "admin_id"
-    t.string   "email"
+    t.string   "address",    null: false
+    t.string   "city",       null: false
+    t.string   "phone",      null: false
+    t.integer  "admin_id",   null: false
+    t.string   "email",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_id"], name: "index_stores_on_admin_id", using: :btree
