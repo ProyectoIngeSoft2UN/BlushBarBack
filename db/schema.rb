@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
-    t.string   "cc"
-    t.string   "name"
-    t.string   "lastName"
-    t.string   "email"
-    t.string   "phone"
+    t.string   "cc",                                  null: false
+    t.string   "name",                                null: false
+    t.string   "lastName",                            null: false
+    t.string   "email",                               null: false
+    t.string   "phone",                               null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -75,18 +75,17 @@ ActiveRecord::Schema.define(version: 20170413193020) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        null: false
-    t.string   "string",      null: false
     t.text     "description", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "cc",         null: false
-    t.string   "name",       null: false
-    t.string   "lastName",   null: false
-    t.string   "email",      null: false
-    t.string   "phone",      null: false
+    t.string   "cc",                                  null: false
+    t.string   "name",                                null: false
+    t.string   "lastName",                            null: false
+    t.string   "email",                               null: false
+    t.string   "phone",                               null: false
     t.string   "address"
     t.string   "string"
     t.string   "city"
@@ -106,12 +105,12 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "cc"
-    t.string   "name"
-    t.string   "lastName"
-    t.string   "email"
-    t.string   "phone"
-    t.integer  "store_id"
+    t.string   "cc",                                  null: false
+    t.string   "name",                                null: false
+    t.string   "lastName",                            null: false
+    t.string   "email",                               null: false
+    t.string   "phone",                               null: false
+    t.integer  "store_id",                            null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -130,7 +129,6 @@ ActiveRecord::Schema.define(version: 20170413193020) do
 
   create_table "images", force: :cascade do |t|
     t.string   "path",        null: false
-    t.string   "string",      null: false
     t.text     "description", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

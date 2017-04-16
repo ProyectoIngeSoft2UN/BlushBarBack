@@ -5,7 +5,7 @@ class Stockstore < ApplicationRecord
   validates :product_id , presence: true,numericality: { only_integer: true}
   validates :store_id, presence: true, numericality: { only_integer: true}
   validates :available, inclusion: { in: [true, false], message: 'Debe ser true o false'}
-  validates :quantity, inclusion: { in: [true, false], message: 'Debe ser true o false'}
+  validates :quantity, presence: true, numericality: { only_integer: true}
 
   def self.is_available_by_id(q)
     select(:available).where(id: q)
