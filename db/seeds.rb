@@ -21,39 +21,43 @@ end
 Category.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("categories")
 
-c1 = Category.create!(name: 'Gel', description: 'Gel para maquillaje')
-c2 = Category.create!(name: 'Tonicos', description: 'Tonico para el cabello')
-c3 = Category.create!(name: 'Polvos', description: 'Polvos faciales')
-c4 = Category.create!(name: 'Lipstick', description: 'Labiales')
-c5 = Category.create!(name: 'Delineador', description: 'Para los ojos')
-c6 = Category.create!(name: 'Cejas', description: 'Articulos para las cejas')
-c7 = Category.create!(name: 'Esmalte', description: 'Diferentes colores para uñas')
-c8 = Category.create!(name: 'Aceite', description: 'Faciales')
+# [Nombre, descripcion]
+category_arr = [
+  ['Gel','Gel para maquillaje'],
+  ['Tonicos','Tonico para el cabello'],
+  ['Polvos','Polvos faciales'],
+  ['Lipstick','Labiales'],
+  ['Delineador','Para los ojos'],
+  ['Cejas','Articulos para las cejas'],
+  ['Esmalte','Diferentes colores para uñas'],
+  ['Aceite','Faciales'],
+]
+
+category_arr.each do |i|
+  Category.create!(name: i[0], description: i[1])
+end
 
 Product.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("products")
 
-p1 = Product.create!(name: 'Galateis Douceur', description: Faker::Lorem.sentence, cost: 137000, category_id: Category.find(1).id)#Gel
-p1.images << Image.find(1)
-p2 = Product.create!(name: 'Pure Tonic', description: Faker::Lorem.sentence, cost: 121000, category_id: Category.find(2).id)#Tonicos
-p2.images << Image.find(1)
-p3 = Product.create!(name: 'Cocoa Powder', description: Faker::Lorem.sentence, cost: 137000, category_id: Category.find(3).id)#Polvos
-p3.images << Image.find(2)
-p4 = Product.create!(name: 'Soft Matte Lip Cream', description: Faker::Lorem.sentence, cost: 39000, category_id: Category.find(4).id)#Lipstick
-p4.images << Image.find(2)
-p5 = Product.create!(name: 'Grandiose Liner', description: Faker::Lorem.sentence, cost: 158000, category_id: Category.find(5).id)#Delineador
-p5.images << Image.find(3)
-p6 = Product.create!(name: 'Slide on pincel', description: Faker::Lorem.sentence, cost: 42000, category_id: Category.find(5).id)#Delineador
-p6.images << Image.find(3)
-p7 = Product.create!(name: 'Sourcilis Styler', description: Faker::Lorem.sentence, cost: 114000, category_id: Category.find(6).id)#Cejas
-p7.images << Image.find(4)
-p8 = Product.create!(name: 'Pattent Shine', description: Faker::Lorem.sentence, cost: 73000, category_id: Category.find(7).id)#Esmalte
-p8.images << Image.find(4)
-p9 = Product.create!(name: 'Nutrient Dense Oil', description: Faker::Lorem.sentence, cost: 234000, category_id: Category.find(8).id)#Aceite
-p9.images << Image.find(5)
-p10 = Product.create!(name: 'Virgin Luxury Oil', description: Faker::Lorem.sentence, cost: 290000, category_id: Category.find(8).id)#Aceite
-p10.images << Image.find(5)
+#[Nombre, costo, category_id, image_id]
+product_arr = [
+  ['Galateis Douceur',137000,1,1],
+  ['Pure Tonic',121000,2,1],
+  ['Cocoa Powder',137000,3,2],
+  ['Soft Matte Lip Cream',39000,4,2],
+  ['Grandiose Liner',158000,5,3],
+  ['Slide on pincel',42000,5,3],
+  ['Sourcilis Styler',114000,6,4],
+  ['Pattent Shine',73000,7,4],
+  ['Nutrient Dense Oil',234000,8,5],
+  ['Virgin Luxury Oil',290000,8,5],
+]
 
+product_arr.each do |i|
+  pr = Product.create!(name: i[0], description: Faker::Lorem.sentence, cost: i[1], category_id: Category.find(i[2]).id)#Gel
+  pr.images << Image.find(i[3])
+end
 
 
 Client.destroy_all
@@ -77,12 +81,18 @@ end
 Store.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("stores")
 
-# Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin: Admin.find(1))
-s1 = Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin_id: Admin.find(1).id)
-s2 = Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin_id: Admin.find(2).id)
-s3 = Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin_id: Admin.find(3).id)
-s4 = Store.create!(address: Faker::Address.street_address, city:'Bogota', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin_id: Admin.find(4).id)
-s5 = Store.create!(address: Faker::Address.street_address, city:'Medellin', phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin_id: Admin.find(5).id)
+#[Ciudad, admin_id]
+store_arr = [
+  ['Bogota',1],
+  ['Bogota',2],
+  ['Bogota',3],
+  ['Bogota',4],
+  ['Medellin',5],
+]
+
+store_arr.each do |i|
+  Store.create!(address: Faker::Address.street_address, city:i[0], phone: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin_id: Admin.find(i[1]).id)
+end
 
 Stockstore.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("stockstores")
@@ -107,11 +117,13 @@ end
 Service.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("services")
 
-sv1 = Service.create!(name: 'Limpieza',description: Faker::Lorem.sentence,cost: [0,10000,25000].sample)
-sv2 = Service.create!(name: 'Uñas',description: Faker::Lorem.sentence,cost: [0,10000,25000].sample)
-sv3 = Service.create!(name: 'Cejas',description: Faker::Lorem.sentence,cost: [0,10000,25000].sample)
-sv4 = Service.create!(name: 'Nocturna',description: Faker::Lorem.sentence,cost: [0,10000,25000].sample)
-sv5 = Service.create!(name: 'Natural',description: Faker::Lorem.sentence,cost: [0,10000,25000].sample)
+services_cost_arr = [0,10000,25000]
+
+services_arr = ['Maquillaje', 'Cuidado Piel', 'Fragancias', 'Cuidado Corporal','Accesorios']
+
+services_arr.each do |i|
+  Service.create!(name: i,description: Faker::Lorem.sentence,cost: services_cost_arr.sample)
+end
 
 Appointment.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("appointments")
