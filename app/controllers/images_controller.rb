@@ -53,4 +53,24 @@ class ImagesController < ApplicationController
     def post_image_params
       params.require(:image).permit(:path, :description)
     end
+
+  def get_images
+    @image = Image.get_images(params[:page],params[:per_page])
+  end
+
+  def get_path
+    @image = Image.get_path(params[:id])
+  end
+
+  def get_description
+    @image = Image.get_description(params[:id])
+  end
+
+  def get_products_by_id
+    @image = Image.get_products_by_id(params[:id])
+  end
+
+  def get_products_by_path
+    @image = Image.get_products_by_path(params[:path])
+  end
 end

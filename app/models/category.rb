@@ -19,10 +19,10 @@ class Category < ApplicationRecord
 
 	def self.get_products_by_id(id)
     includes(:products).where(id: id)
-  end
+  	end
 
 	def self.get_products_by_name(name)
     includes(:products).where(name: name)
-  end
+  	end
 
 end
