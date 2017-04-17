@@ -39,4 +39,44 @@ class ProductsController < ApplicationController
 		redirect_to action: "list"
 
 	end
+
+	def get_cost_by_name
+		@product = Product.get_cost_by_name(params[:q])
+	end
+
+	def get_cost_by_id
+		@product = Product.get_cost_by_id(params[:q])
+	end
+
+	def get_description_by_name
+		@product = Product.get_description_by_name(params[:q])
+	end
+
+	def get_description_by_id
+		@product = Product.get_description_by_id(params[:q])
+	end
+
+	def get_bills_by_name
+		@product = Product.get_bills_by_name(params[:id])
+	end
+
+	def get_bills_by_id
+		@product = Product.get_bills_by_id(params[:name])
+	end
+
+	def get_categories_by_name
+		@product = Product.get_categories_by_name(params[:id])
+	end
+
+	def get_categories_by_id
+		@product = Product.get_categories_by_id(params[:name])
+	end
+
+	def get_images_by_name
+		@product = Product.get_images_by_name(params[:name])
+	end
+
+	def get_images_by_id
+		@product = Product.get_images_by_id(params[:id])
+	end
 end

@@ -40,4 +40,101 @@ class ClientsController < ApplicationController
 		redirect_to action: "list"
 
 	end
+
+	def get_clients
+		@client = Client.get_clients(params[:page],params[:per_page])
+	end
+
+	def get_by_id
+		@client = Client.get_by_id(params[:id])
+	end
+
+	def get_by_cc
+		@client = Client.get_by_cc(params[:cc])
+	end
+
+	def get_name_by_id
+		@client = Client.get_name_by_id(params[:id])
+	end
+
+	def get_name_by_cc
+		@client = Client.get_name_by_cc(params[:cc])
+	end
+
+	def get_lastName_by_id
+		@client = Client.get_lastName_by_id(params[:id])
+	end
+
+	def get_lastName_by_cc
+		@client = Client.get_lastName_by_cc(params[:cc])
+	end
+
+	def get_email_by_id
+		@client = Client.get_email_by_id(params[:id])
+	end
+
+	def get_email_by_cc
+		@client = Client.get_email_by_cc(params[:cc])
+	end
+
+	def get_phone_by_id
+		@client = Client.get_phone_by_id(params[:id])
+	end
+
+	def get_phone_by_cc
+		@client = Client.get_phone_by_cc(params[:cc])
+	end
+
+	def get_city_by_id
+		@client = Client.get_city_by_id(params[:id])
+	end
+
+	def get_city_by_cc
+		@client = Client.get_city_by_cc(params[:cc])
+	end
+
+	def get_address_by_id
+		@client = Client.get_address_by_id(params[:id])
+	end
+
+	def get_address_by_cc
+		@client = Client.get_address_by_cc(params[:cc])
+	end
+
+	def get_appointments_by_client_id
+		@client = Client.get_appointments_by_client_id(params[:q])
+	end
+
+	def get_appointments_by_client_cc
+		@client = Client.get_appointments_by_client_cc(params[:cc])
+	end
+
+	def get_bills_by_client_id
+		@client = Client.get_bills_by_client_id(params[:q])
+	end
+
+	def get_appointments_by_client_cc
+		@client = Client.get_bills_by_client_cc(params[:cc])
+	end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
