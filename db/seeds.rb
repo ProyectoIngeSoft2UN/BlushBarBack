@@ -23,14 +23,11 @@ ActiveRecord::Base.connection.reset_pk_sequence!("categories")
 
 # [Nombre, descripcion]
 category_arr = [
-  ['Gel','Gel para maquillaje'],
-  ['Tonicos','Tonico para el cabello'],
-  ['Polvos','Polvos faciales'],
-  ['Lipstick','Labiales'],
-  ['Delineador','Para los ojos'],
-  ['Cejas','Articulos para las cejas'],
-  ['Esmalte','Diferentes colores para uñas'],
-  ['Aceite','Faciales'],
+  ['Maquillaje','La mejores mar'],
+  ['Cuidado de Piel','Tonico para el cabello'],
+  ['Fragancias','Polvos faciales'],
+  ['Cuidado de piel','Labiales'],
+  ['Accesorios','Para los ojos'],
 ]
 
 category_arr.each do |i|
