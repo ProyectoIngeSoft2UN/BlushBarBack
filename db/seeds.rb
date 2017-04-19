@@ -45,10 +45,10 @@ product_arr = [
   ['Soft Matte Lip Cream',39000,4,2],
   ['Grandiose Liner',158000,5,3],
   ['Slide on pincel',42000,5,3],
-  ['Sourcilis Styler',114000,6,4],
-  ['Pattent Shine',73000,7,4],
-  ['Nutrient Dense Oil',234000,8,5],
-  ['Virgin Luxury Oil',290000,8,5],
+  ['Sourcilis Styler',114000,2,4],
+  ['Pattent Shine',73000,2,4],
+  ['Nutrient Dense Oil',234000,3,5],
+  ['Virgin Luxury Oil',290000,4,5],
 ]
 
 product_arr.each do |i|
