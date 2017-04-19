@@ -26,7 +26,7 @@ category_arr = [
   ['Maquillaje','La mejores mar'],
   ['Cuidado de Piel','Tonico para el cabello'],
   ['Fragancias','Polvos faciales'],
-  ['Cuidado de piel','Labiales'],
+  ['Cuidado Corporal','Labiales'],
   ['Accesorios','Para los ojos'],
 ]
 
@@ -44,16 +44,13 @@ subcategory_arr = [
   ['Labios','',1],
   ['Uñas','',1],
   ['Ojos','',1],
-  ['Brochas y Aplicadores','',1],
   ['Limpiadora y Desmaquillantes','',2],
   ['Hidratantes','',2],
   ['Sueros y Tratamientos Faciales','',2],
-  ['Tools de Limpieza Facial','',2],
   ['Exfoliantes y Mascarillas','',2],
   ['Tratamiento de Labios','',2],
   ['Bloqueadores Solares','',2],
   ['Contorno de Ojos','',2],
-  ['Kits de Cuidado Facial','',2],
   ['Perfume de Mujeres','',3],
   ['Perfume de Hombres','',3],
   ['Fragancias para Hogar','',3],
@@ -63,16 +60,13 @@ subcategory_arr = [
   ['Desodorantes','',4],
   ['Jabones Liquidos','',4],
   ['Tratamientos','',4],
-  ['Tools Anti Celulitis','',4],
-  ['Kits de Cuidado Corporal','',4],
-  ['Bebe','',4],
   ['Brochas y Aplicadores','',5],
   ['Cosmetiquera y Bolsas','',5],
   ['Sacapuntas','',5],
   ['Cepillos','',5],
   ['Encrespadores de Pestañas','',5],
   ['Tools de Limpieza Facial','',5],
-  ['Toosl Anti Celulitis','',5],
+  ['Tools Anti Celulitis','',5],
 ]
 
 Product.destroy_all
