@@ -34,10 +34,51 @@ category_arr.each do |i|
   Category.create!(name: i[0], description: i[1])
 end
 
+Subcategory.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!("subcategories")
+
+#[Nombre, descripcion,category_id]
+#Muchas subcategorias son repetidas
+subcategory_arr = [
+  ['Cara','',1],
+  ['Labios','',1],
+  ['Uñas','',1],
+  ['Ojos','',1],
+  ['Brochas y Aplicadores','',1],
+  ['Limpiadora y Desmaquillantes','',2],
+  ['Hidratantes','',2],
+  ['Sueros y Tratamientos Faciales','',2],
+  ['Tools de Limpieza Facial','',2],
+  ['Exfoliantes y Mascarillas','',2],
+  ['Tratamiento de Labios','',2],
+  ['Bloqueadores Solares','',2],
+  ['Contorno de Ojos','',2],
+  ['Kits de Cuidado Facial','',2],
+  ['Perfume de Mujeres','',3],
+  ['Perfume de Hombres','',3],
+  ['Fragancias para Hogar','',3],
+  ['Cremas Hidratantes y Aceites','',4],
+  ['Exfoliantes','',4],
+  ['Cremas de Manos','',4],
+  ['Desodorantes','',4],
+  ['Jabones Liquidos','',4],
+  ['Tratamientos','',4],
+  ['Tools Anti Celulitis','',4],
+  ['Kits de Cuidado Corporal','',4],
+  ['Bebe','',4],
+  ['Brochas y Aplicadores','',5],
+  ['Cosmetiquera y Bolsas','',5],
+  ['Sacapuntas','',5],
+  ['Cepillos','',5],
+  ['Encrespadores de Pestañas','',5],
+  ['Tools de Limpieza Facial','',5],
+  ['Toosl Anti Celulitis','',5],
+]
+
 Product.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("products")
 
-#[Nombre, costo, category_id, image_id]
+#[Nombre, costo, subcategory_id, image_id]
 product_arr = [
   ['Galateis Douceur',137000,1,1],
   ['Pure Tonic',121000,2,1],
@@ -52,7 +93,7 @@ product_arr = [
 ]
 
 product_arr.each do |i|
-  pr = Product.create!(name: i[0], description: Faker::Lorem.sentence, cost: i[1], category_id: Category.find(i[2]).id)#Gel
+  pr = Product.create!(name: i[0], description: Faker::Lorem.sentence, cost: i[1], subcategory_id: Category.find(i[2]).id)#Gel
   pr.images << Image.find(i[3])
 end
 

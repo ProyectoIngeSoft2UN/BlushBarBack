@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  belongs_to :category
+  belongs_to :subcategory
   has_many :stockstores
   has_and_belongs_to_many :bills
   has_and_belongs_to_many :images
@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   validates :name, presence: {message: 'Nombre no debe ser vacio'}
 	validates :description, presence: {message: 'Descripcion no debe ser vacia'}
 	validates :cost, numericality: true, presence: {message: 'El costo no debe ser vacio'}
-	validates :category_id , numericality: { only_integer: true}, presence: true
+	validates :subcategory_id , numericality: { only_integer: true}, presence: true
 
 	def self.get_products(page, per_page)
 		select(:name,:description,:cost)
@@ -44,11 +44,11 @@ class Product < ApplicationRecord
   def self.get_bills_by_name(name)
 		includes(:bills).where(name: name)
 	end
-
+#MOD
 	def self.get_categories_by_id(id)
 		includes(:category).where(id: id)
 	end
-
+#MOD
   def self.get_categories_by_name(name)
 		includes(:category).where(name: name)
 	end
