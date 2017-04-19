@@ -49,6 +49,7 @@ product_arr = [
   ['Pattent Shine',73000,2,4],
   ['Nutrient Dense Oil',234000,3,5],
   ['Virgin Luxury Oil',290000,4,5],
+  ['Nuevo Producto',35500,1,1],
 ]
 
 product_arr.each do |i|
@@ -116,7 +117,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!("services")
 
 services_cost_arr = [0,10000,25000]
 
-services_arr = ['Maquillaje', 'Cuidado Piel', 'Fragancias', 'Cuidado Corporal','Accesorios']
+services_arr = ['Miti miti', 'Tea Party', 'Make up Party', 'BB Brow','Quickies']
 
 services_arr.each do |i|
   Service.create!(name: i,description: Faker::Lorem.sentence,cost: services_cost_arr.sample)
