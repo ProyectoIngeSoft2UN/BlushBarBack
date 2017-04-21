@@ -22,11 +22,11 @@ class Product < ApplicationRecord
   # end
 
 	def self.get_cost_by_name(q)
-		select(:quantity).where(name: q)
+		select(:cost).where(name: q)
 	end
 
 	def self.get_cost_by_id(q)
-		select(:quantity).where(id: q)
+		select(:id,:cost).where(id: q)
 	end
 
 	def self.get_description_by_name(q)
@@ -51,6 +51,15 @@ class Product < ApplicationRecord
 #MOD
   def self.get_categories_by_name(name)
 		includes(:category).where(name: name)
+	end
+
+#MOD
+	def self.get_subcategories_by_id(id)
+		includes(:subcategory).where(id: id)
+	end
+#MOD
+  def self.get_subcategories_by_name(name)
+		includes(:subcategory).where(name: name)
 	end
 
 	def self.get_images_by_id(id)

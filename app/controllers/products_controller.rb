@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
 
 	def show
 		@product = Product.find(params[:id])
+		render json: @product
 	end
 
 	def new
@@ -41,11 +42,14 @@ class ProductsController < ApplicationController
 	end
 
 	def get_cost_by_name
-		@product = Product.get_cost_by_name(params[:q])
+		@product = Product.get_cost_by_name(params[:id])
+		render json: @product
 	end
 
 	def get_cost_by_id
-		@product = Product.get_cost_by_id(params[:q])
+		@product = Product.get_cost_by_id(params[:id])
+		p @product
+		render json: @product, fields: [:cost]
 	end
 
 	def get_description_by_name

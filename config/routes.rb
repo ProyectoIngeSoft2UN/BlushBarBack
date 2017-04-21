@@ -28,8 +28,19 @@ Rails.application.routes.draw do
   resources :stockstores do
     root to: 'stockstores#index'
   end
+  resources :products
   resources :products do
+    get 'bills', to: 'products#get_bills_by_id'
+    member do
+      get 'cost', to: 'products#get_cost_by_id'
+    end
     root to: 'products#index'
+    get '', to: 'products#show'
+    # get ':id', to: 'products#show'
+    # show '', to: 'products#show'
+    # collection do
+    #   get 'get-by-name' to: 'products#get_products_by_name'
+    # end
   end
   resources :stores do
     root to: 'stores#index'

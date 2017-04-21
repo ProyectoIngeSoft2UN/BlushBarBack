@@ -69,6 +69,10 @@ subcategory_arr = [
   ['Tools Anti Celulitis','',5],
 ]
 
+subcategory_arr.each do |i|
+  Subcategory.create!(name: i[0], description: Faker::Lorem.sentence, category_id: Category.find(i[2]).id)
+end
+
 Product.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("products")
 
@@ -87,7 +91,7 @@ product_arr = [
 ]
 
 product_arr.each do |i|
-  pr = Product.create!(name: i[0], description: Faker::Lorem.sentence, cost: i[1], subcategory_id: Category.find(i[2]).id)#Gel
+  pr = Product.create!(name: i[0], description: Faker::Lorem.sentence, cost: i[1], subcategory_id: Subcategory.find(i[2]).id)
   pr.images << Image.find(i[3])
 end
 
