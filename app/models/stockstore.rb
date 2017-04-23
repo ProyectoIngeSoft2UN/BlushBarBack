@@ -7,11 +7,16 @@ class Stockstore < ApplicationRecord
   validates :available, inclusion: { in: [true, false], message: 'Debe ser true o false'}
   validates :quantity, presence: true, numericality: { only_integer: true}
 
-  def self.is_available_by_id(q)
+  def self.get_stockstores(page,per_page)
+    includes(:product, :store)
+		.paginate(:page => page,:per_page => per_page)
+  end
+
+  def self.is_available(q)
     select(:available).where(id: q)
   end
 
-  def self.get_quantity_by_id(q)
+  def self.get_quantity(q)
     select(:quantity).where(id: q)
   end
 

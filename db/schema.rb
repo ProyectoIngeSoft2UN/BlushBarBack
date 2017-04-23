@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413193020) do
+ActiveRecord::Schema.define(version: 20170422230200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,13 +144,23 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.text     "description", null: false
-    t.integer  "category_id", null: false
-    t.integer  "cost",        null: false
+    t.string   "name",           null: false
+    t.text     "description",    null: false
+    t.integer  "cost",           null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "brand"
+    t.integer  "subcategory_id"
+    t.index ["subcategory_id"], name: "index_products_on_subcategory_id", using: :btree
+  end
+
+  create_table "references", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "product_id"
+    t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["category_id"], name: "index_products_on_category_id", using: :btree
+    t.index ["product_id"], name: "index_references_on_product_id", using: :btree
   end
 
   create_table "services", force: :cascade do |t|
@@ -183,6 +193,15 @@ ActiveRecord::Schema.define(version: 20170413193020) do
     t.index ["admin_id"], name: "index_stores_on_admin_id", using: :btree
   end
 
+  create_table "subcategories", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_subcategories_on_category_id", using: :btree
+  end
+
   add_foreign_key "appointments", "clients"
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
@@ -194,8 +213,9 @@ ActiveRecord::Schema.define(version: 20170413193020) do
   add_foreign_key "employees", "stores"
   add_foreign_key "images_products", "images"
   add_foreign_key "images_products", "products"
-  add_foreign_key "products", "categories"
+  add_foreign_key "references", "products"
   add_foreign_key "stockstores", "products"
   add_foreign_key "stockstores", "stores"
   add_foreign_key "stores", "admins"
+  add_foreign_key "subcategories", "categories"
 end

@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def get_description_by_name
-		@category = Category.get_description_by_name(params[:cat])
+		@category = Category.get_description_by_name(params[:name])
 	end
 
 	def get_description_by_id
