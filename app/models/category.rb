@@ -10,7 +10,7 @@ class Category < ApplicationRecord
 		.paginate(:page => page,:per_page => per_page)
 	end
 
-	def self.get_subcategories_by_id(page,per_page,id)
+	def self.get_subcategories_by_id(id, page,per_page)
 		includes(:subcategories).where(id: id)
 		.paginate(:page => page,:per_page => per_page)
 	end

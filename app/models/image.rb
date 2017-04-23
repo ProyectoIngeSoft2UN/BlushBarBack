@@ -6,7 +6,7 @@ class Image < ApplicationRecord
 	validates :description, presence: {message: 'La descripcion no debe ser vacia'}
 
 	def self.get_images(page, per_page)
-		select(:name, :description)
+		select(:path, :description)
 		.paginate(:page => page,:per_page => per_page)
 	end
 

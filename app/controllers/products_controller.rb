@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 	def index
-		render json: Product.all, root: "data"
+		render json: Product.get_products(1,14), root: "data"
 	end
 	def list
 		Product.index
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
 	def get_cost_by_id
 		@product = Product.get_cost_by_id(params[:id])
 		p @product
-		render json: @product, fields: [:cost]
+		render json: @product#, fields: [:cost]
 	end
 
 	def get_description_by_name

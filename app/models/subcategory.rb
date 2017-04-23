@@ -24,7 +24,7 @@ class Subcategory < ApplicationRecord
   end
 
   def self.get_description_by_name(name)
-    select(:description).where(name: name)
+    select(:name, :description).where(name: name)
   end
 
   def self.get_products_by_id(id)

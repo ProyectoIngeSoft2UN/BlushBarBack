@@ -11,7 +11,7 @@ class Admin < ApplicationRecord
 	validates :email, presence: true, format: { with: /[\+A-Z0-9\._%-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}/i, message: "person@example.com" }
 	validates :phone, presence: true
 
-	def self.load_admins(page, per_page)
+	def self.get_admins(page, per_page)
 		select(:cc,:name,:lastName,:email,:phone)
 		.paginate(:page => page,:per_page => per_page)
 	end

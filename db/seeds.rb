@@ -76,23 +76,43 @@ end
 Product.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("products")
 
-#[Nombre, costo, subcategory_id, image_id]
+#[Nombre, costo, subcategory_id, image_id,brand]
 product_arr = [
-  ['Galateis Douceur',137000,1,1],
-  ['Pure Tonic',121000,2,1],
-  ['Cocoa Powder',137000,3,2],
-  ['Soft Matte Lip Cream',39000,4,2],
-  ['Grandiose Liner',158000,5,3],
-  ['Slide on pincel',42000,5,3],
-  ['Sourcilis Styler',114000,6,4],
-  ['Pattent Shine',73000,7,4],
-  ['Nutrient Dense Oil',234000,8,5],
-  ['Virgin Luxury Oil',290000,8,5],
+  ['Galateis Douceur',137000,1,1,'Bliss'],
+  ['Pure Tonic',121000,2,1,'Butter London'],
+  ['Cocoa Powder',137000,3,2,'Nest'],
+  ['Soft Matte Lip Cream',39000,4,2,'Tocca'],
+  ['Grandiose Liner',158000,5,3,'Bliss'],
+  ['Slide on pincel',42000,5,3,'Bliss'],
+  ['Sourcilis Styler',114000,6,4,'Giorgio Armani'],
+  ['Pattent Shine',73000,7,4,'Tocca'],
+  ['Nutrient Dense Oil',234000,8,5,'Nest'],
+  ['Virgin Luxury Oil',290000,8,5,'Nest'],
 ]
 
 product_arr.each do |i|
-  pr = Product.create!(name: i[0], description: Faker::Lorem.sentence, cost: i[1], subcategory_id: Subcategory.find(i[2]).id)
+  pr = Product.create!(name: i[0], description: Faker::Lorem.sentence, cost: i[1], subcategory_id: Subcategory.find(i[2]).id, brand: i[4])
   pr.images << Image.find(i[3])
+end
+
+Reference.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('references')
+
+#Name, Product_id
+references_arr = [
+  ['Rosa',1],
+  ['Rojo',1],
+  ['Durazno',2],
+  ['Rojo',2],
+  ['Miel',3],
+  ['Rosa',3],
+  ['Rojo',4],
+  ['Rosa',2],
+  ['Durazno',1],
+]
+
+references_arr.each do |i|
+  rf = Reference.create!(name: i[0], product_id: Product.find(i[1]).id,description: Faker::Lorem.sentence)
 end
 
 

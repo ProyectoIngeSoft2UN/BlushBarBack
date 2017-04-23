@@ -15,7 +15,7 @@ class Store < ApplicationRecord
 	#validates_associated :products
 
   def self.get_stores(page, paginate)
-		select(:address,:city,:phone,:email,:admin)
+		select(:address,:city,:phone,:email,:admin_id)
     .paginate(:page => page,:per_page => per_page)
 	end
 
