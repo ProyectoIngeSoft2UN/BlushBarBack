@@ -18,6 +18,54 @@ class Client < ApplicationRecord
 		.paginate(:page => page,:per_page => per_page)
 	end
 
+  def self.get_clients_by_name(name,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('name ILIKE ?',"%#{name}%").order(col[1]+' DESC')
+      else
+        where('name ILIKE ?',"%#{name}%").order(col[0])
+      end
+    else
+      where('name ILIKE ?',"%#{name}%")
+    end
+  end
+
+  def self.get_clients_by_lastname(lastName,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('lastName ILIKE ?',"%#{lastName}%").order(col[1]+' DESC')
+      else
+        where('lastName ILIKE ?',"%#{lastName}%").order(col[0])
+      end
+    else
+      where('lastName ILIKE ?',"%#{lastName}%")
+    end
+  end
+
+  def self.get_clients_by_cc(cc,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('cc ILIKE ?',"%#{cc}%").order(col[1]+' DESC')
+      else
+        where('cc ILIKE ?',"%#{cc}%").order(col[0])
+      end
+    else
+      where('cc ILIKE ?',"%#{cc}%")
+    end
+  end
+
+  def self.get_clients_by_email(email,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('email ILIKE ?',"%#{email}%").order(col[1]+' DESC')
+      else
+        where('email ILIKE ?',"%#{email}%").order(col[0])
+      end
+    else
+      where('email ILIKE ?',"%#{email}%")
+    end
+  end
+
 	def self.get_by_id(id)
 		select(:cc,:name,:lastName,:email,:phone).where(id: id)
 	end

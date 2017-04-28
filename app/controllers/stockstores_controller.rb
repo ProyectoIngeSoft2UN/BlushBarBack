@@ -8,6 +8,7 @@ class StockstoresController < ApplicationController
 
 	def show
 		@stockstore = Stockstore.find(params[:id])
+    render json: @stockstore
 	end
 
 	def new
@@ -38,22 +39,42 @@ class StockstoresController < ApplicationController
 		@stockstore.destroy
 		redirect_to action: "list"
 	end
+  #
+	# def is_available_by_id
+	# 	@stockstore = Stockstore.is_available_by_id(params[:q])
+	# end
+  #
+	# def get_quantity_by_id
+	# 	@stockstore = Stockstore.get_quantity_by_id(params[:q])
+	# end
+  #
+	# def get_available_of
+	# 	@stockstore = Stockstore.get_available_of(params[:productid])
+	# end
+  #
+	# def get_stores_of
+	# 	@stockstore = Stockstore.get_stores_of(params[:storeid])
+	# end
+  #
 
-	def is_available_by_id
-		@stockstore = Stockstore.is_available_by_id(params[:q])
-	end
+  def get_stockstores_by_available
+    if params[:sort].present?
+      s = params[:sort].split('-')
+      @stockstore = Stockstore.get_stockstores_by_available(params[:available],s)
+    else
+      @stockstore = Stockstore.get_stockstores_by_available(params[:available])
+    end
+    render json: @stockstore
+  end
 
-	def get_quantity_by_id
-		@stockstore = Stockstore.get_quantity_by_id(params[:q])
-	end
-
-	def get_available_of
-		@stockstore = Stockstore.get_available_of(params[:productid])
-	end
-
-	def get_stores_of
-		@stockstore = Stockstore.get_stores_of(params[:storeid])
-	end
-
+  def get_products_by_cost
+    if params[:sort].present?
+      s = params[:sort].split('-')
+      @stockstore = Stockstore.get_stockstores_by_cost(params[:cost],s)
+    else
+      @stockstore = Stockstore.get_stockstores_by_cost(params[:cost])
+    end
+    render json: @stockstore
+  end
 
 end

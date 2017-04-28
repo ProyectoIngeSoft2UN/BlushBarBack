@@ -11,10 +11,56 @@ class Product < ApplicationRecord
 	validates :subcategory_id , numericality: { only_integer: true}, presence: true
   validates :brand, presence: {message: 'Marca no debe estar vacio'}
 
-	def self.get_products(page, per_page)
+	def self.get_products(page,per_page)
 		select(:id,:name,:description,:cost,:brand,:subcategory_id)
 		.paginate(:page => page,:per_page => per_page)
 	end
+
+  # def self.get_products_sorted(col)
+  #   if col.size == 2
+  #     order(col[1]+' DESC')
+  #   else
+  #     order(col[0])
+  #   end
+  # end
+
+  def self.get_products_by_name(name,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('name ILIKE ?',"%#{name}%").order(col[1]+' DESC')
+      else
+        where('name ILIKE ?',"%#{name}%").order(col[0])
+      end
+    else
+      where('name ILIKE ?',"%#{name}%")
+    end
+  end
+
+  def self.get_products_by_brand(brand,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('brand ILIKE ?',"%#{brand}%").order(col[1]+' DESC')
+      else
+        where('brand ILIKE ?',"%#{brand}%").order(col[0])
+      end
+    else
+      where('brand ILIKE ?',"%#{brand}%")
+    end
+  end
+
+  def self.get_products_by_cost(cost,col = nil)
+    if col.present?
+      if  col.size == 2
+        #where('CAST(cost AS TEXT) LIKE ?',"%#{cost}%").
+        order(col[1]+' DESC')
+      else
+        #where('CAST(cost AS TEXT) LIKE ?',"%#{cost}%").
+        order(col[0])
+      end
+    # else
+    #   where('CAST (cost AS TEXT) LIKE ?',"%#{cost}%")
+    end
+  end
 
 	def self.get_cost_by_name(q)
 		select(:cost).where(name: q)

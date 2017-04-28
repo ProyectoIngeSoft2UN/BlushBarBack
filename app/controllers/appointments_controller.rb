@@ -8,6 +8,7 @@ class AppointmentsController < ApplicationController
 
 	def show
 		@appointment = Appointment.find(params[:id])
+		render json: @appointment
 	end
 
 	def new
@@ -29,7 +30,7 @@ class AppointmentsController < ApplicationController
 
 	def update
 		@appointment = Appointment.find(params[:id])
-		@appointment.update(client: params[:client], employee: params[:employee], payment: params[:payment], active: params[:active])
+		@appointment.update(client: params[:client], employee: params[:employee], is_paid: params[:is_paid], active: params[:active])
 
 	end
 
@@ -46,30 +47,57 @@ class AppointmentsController < ApplicationController
 
 	def get_appointments_by_employee_id
 		@appointment = Appointment.get_appointments_by_employee_id(params[:id],params[:page], params[:per_page])
-	end
+		render json: @appointment
+		end
 
 	def get_appointments_by_client_id
 		@appointment = Appointment.get_appointments_by_client_id(params[:id],params[:page], params[:per_page])
+		render json: @appointment
 	end
 
 	def get_appointments_by_store_id
 		@appointment = Appointment.get_store_by_employee_id(params[:id],params[:page], params[:per_page])
+		render json: @appointment
 	end
 
 	def get_appointments_by_service_id
 		@appointment = Appointment.get_appointments_by_service_id(params[:id],params[:page], params[:per_page])
+		render json: @appointment
 	end
 
 	def is_paid
 		@appointment = Appointment.is_paid(params[:id])
+		render json: @appointment, fields: [:is_paid]
 	end
 
 	def is_active
 		@appointment = Appointment.is_active(params[:id])
+		render json: @appointment, fields: [:active]
 	end
 
 	def get_dateTime
 		@appointment = Appointment.get_dateTime(params[:id])
+		render json: @appointment, fields: [:dateTime]
+	end
+
+	def get_appointments_by_paid
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@appointment = Appointment.get_appointments_by_paid(params[:is_paid],s)
+		else
+			@appointment = Appointment.get_appointments_by_paid(params[:is_paid])
+		end
+		render json: @appointment
+	end
+
+	def get_appointments_by_active
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@appointment = Appointment.get_appointments_by_active(params[:active],s)
+		else
+			@appointment = Appointment.get_appointments_by_active(params[:active])
+		end
+		render json: @appointment
 	end
 
 end

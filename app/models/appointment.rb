@@ -18,6 +18,42 @@ class Appointment < ApplicationRecord
     #.paginate(:page => params[:page],:per_page => per_page)
   end
 
+  def self.get_appointments_by_paid(paid,col = nil)
+    if col.present?
+      if  col.size == 2
+        where(is_paid: paid).order(col[1]+' DESC')
+      else
+        where(is_paid: paid).order(col[0])
+      end
+    else
+      where(is_paid: paid)
+    end
+  end
+
+  def self.get_appointments_by_active(active,col = nil)
+    if col.present?
+      if  col.size == 2
+        where(active: active).order(col[1]+' DESC')
+      else
+        where(active: active).order(col[0])
+      end
+    else
+      where(active: active)
+    end
+  end
+
+  def self.get_appointments_by_datetime(datetime,col = nil)
+    if col.present?
+      if  col.size == 2
+        where(dateTime: dateTime).order(col[1]+' DESC')
+      else
+        where(dateTime: dateTime).order(col[0])
+      end
+    # else
+    #   where(active: active)
+    end
+  end
+
   def self.get_appointments_by_employee_id(id,page,per_page)
     includes(:employee).where(employee_id: id)
     .paginate(:page => page,:per_page => per_page)

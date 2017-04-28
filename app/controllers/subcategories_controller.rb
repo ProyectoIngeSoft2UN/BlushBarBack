@@ -9,6 +9,7 @@ class SubcategoriesController < ApplicationController
 
 	def show
 		@subcategory = Subcategory.find(params[:id])
+		render json: @subcategory
 	end
 
 	def new
@@ -44,20 +45,30 @@ class SubcategoriesController < ApplicationController
 	def get_subcategories
 		@subcategory = Subcategory.get_subcategories(params[:page],params[:per_page])
 	end
+	#
+	# def get_description_by_name
+	# 	@subcategory = Subcategory.get_description_by_name(params[:name])
+	# end
+	#
+	# def get_description_by_id
+	# 	@subcategory = Subcategory.get_description_by_id(params[:id])
+	# end
+	#
+	# def get_products_by_id
+	# 	@subcategory = Subcategory.get_products_by_id(params[:id])
+	# end
+	#
+	# def get_products_by_name
+	# 	@subcategory = Subcategory.get_products_by_name(params[:name])
+	# end
 
-	def get_description_by_name
-		@subcategory = Subcategory.get_description_by_name(params[:name])
-	end
-
-	def get_description_by_id
-		@subcategory = Subcategory.get_description_by_id(params[:id])
-	end
-
-	def get_products_by_id
-		@subcategory = Subcategory.get_products_by_id(params[:id])
-	end
-
-	def get_products_by_name
-		@subcategory = Subcategory.get_products_by_name(params[:name])
+	def get_subcategories_by_name
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@subcategory = Subcategory.get_subcategories_by_name(params[:name],s)
+		else
+			@subcategory = Subcategory.get_subcategories_by_name(params[:name])
+		end
+		render json: @subcategory
 	end
 end

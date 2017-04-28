@@ -8,6 +8,7 @@ class StoresController < ApplicationController
 
 	def show
 		@store = Store.find(params[:id])
+		render json: @store
 	end
 
 	def new
@@ -46,46 +47,90 @@ class StoresController < ApplicationController
 
 	def get_by_city
 		@store = Store.get_by_city(params[:city])
+		render json: @store
 	end
 
 	def get_by_address
 		@store = Store.get_by_address(params[:address])
+		render json: @store
 	end
 
 	def get_by_email
 		@store = Store.get_by_email(params[:email])
+		render json: @store
 	end
 
 	def get_by_phone
 		@store = Store.get_by_phone(params[:phone])
+		render json: @store
+	end
+	#
+	# def get_admin_of
+	# 	@store = Store.get_admin_of(params[:id])
+	# end
+	#
+	# def get_employees_of
+	# 	@store = Store.get_employees_of(params[:id])
+	# end
+	#
+	# def get_address_of
+	# 	@store = Store.get_address_of(params[:address])
+	# end
+	#
+	# def get_city_of
+	# 	@store = Store.get_city_of(params[:city])
+	# end
+	#
+	# def get_phone_of
+	# 	@store = Store.get_phone_of(params[:phone])
+	# end
+	#
+	# def get_email_of
+	# 	@store = Store.get_email_of(params[:email])
+	# end
+	#
+	# def get_available_of
+	# 	@store = Store.get_available_of(params[:productid])
+	# end
+
+	def get_stores_by_address
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@store = Store.get_stores_by_address(params[:address],s)
+		else
+			@store = Store.get_stores_by_address(params[:address])
+		end
+		render json: @store
 	end
 
-	def get_admin_of
-		@store = Store.get_admin_of(params[:id])
+	def get_stores_by_city
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@store = Store.get_stores_by_city(params[:city],s)
+		else
+			@store = Store.get_stores_by_city(params[:city])
+		end
+		render json: @store
 	end
 
-	def get_employees_of
-		@store = Store.get_employees_of(params[:id])
+	def get_stores_by_phone
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@store = Store.get_stores_by_phone(params[:phone],s)
+		else
+			@store = Store.get_stores_by_phone(params[:phone])
+		end
+		render json: @store
 	end
 
-	def get_address_of
-		@store = Store.get_address_of(params[:address])
-	end
-
-	def get_city_of
-		@store = Store.get_city_of(params[:city])
-	end
-
-	def get_phone_of
-		@store = Store.get_phone_of(params[:phone])
-	end
-
-	def get_email_of
-		@store = Store.get_email_of(params[:email])
-	end
-
-	def get_available_of
-		@store = Store.get_available_of(params[:productid])
+	def get_stores_by_email
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@store = Store.get_stores_by_email(params[:email],s)
+		else
+			@store = Store.get_stores_by_email(params[:email])
+		end
+		render json: @store
 	end
 
 end
