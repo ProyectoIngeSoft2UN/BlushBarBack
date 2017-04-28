@@ -8,6 +8,7 @@ class CategoriesController < ApplicationController
 
 	def show
 		@category = Category.find(params[:id])
+		render json: @category
 	end
 
 	def new
@@ -42,21 +43,23 @@ class CategoriesController < ApplicationController
 
 	def get_categories
 		@category = Category.get_categories(params[:page],params[:per_page])
+		render json: @category
 	end
 
-	def get_description_by_name
-		@category = Category.get_description_by_name(params[:name])
-	end
-
-	def get_description_by_id
-		@category = Category.get_description_by_id(params[:id])
-	end
-
-	def get_products_by_id
-		@category = Category.get_products_by_id(params[:id])
-	end
-
-	def get_products_by_name
-		@category = Category.get_products_by_name(params[:name])
-	end
+	# def get_description_by_name
+	# 	@category = Category.get_description_by_name(params[:name])
+	#
+	# end
+	#
+	# def get_description_by_id
+	# 	@category = Category.get_description_by_id(params[:id])
+	# end
+	#
+	# def get_products_by_id
+	# 	@category = Category.get_products_by_id(params[:id])
+	# end
+	#
+	# def get_products_by_name
+	# 	@category = Category.get_products_by_name(params[:name])
+	# end
 end

@@ -9,6 +9,7 @@ class ServicesController < ApplicationController
 
 	def show
 		@service = Service.find(params[:id])
+    render json: @service
 	end
 
 	def new
@@ -43,18 +44,20 @@ class ServicesController < ApplicationController
 
 	def get_services
 		@service = Service.get_services(params[:page],params[:per_page])
+    render json: @service
 	end
 
 	def get_service_by_name
 		@service = Service.get_service_by_name(params[:name])
+    render json: @service
 	end
 
-	def get_appointments_by_id
-		@service = Service.get_appointments_by_id(params[:id])
-	end
-
-	def get_appointments_by_name
-		@service = Service.get_appointments_by_name(params[:name])
-	end
+	# def get_appointments_by_id
+	# 	@service = Service.get_appointments_by_id(params[:id])
+	# end
+  #
+	# def get_appointments_by_name
+	# 	@service = Service.get_appointments_by_name(params[:name])
+	# end
 
 end

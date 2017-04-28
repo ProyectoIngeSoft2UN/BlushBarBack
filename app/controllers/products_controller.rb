@@ -43,25 +43,28 @@ class ProductsController < ApplicationController
 
 	def get_cost_by_name
 		@product = Product.get_cost_by_name(params[:id])
-		render json: @product
+		render json: @product, fields: [:cost]
 	end
 
 	def get_cost_by_id
 		@product = Product.get_cost_by_id(params[:id])
 		p @product
-		render json: @product#, fields: [:cost]
+		render json: @product, fields: [:cost]
 	end
 
 	def get_description_by_name
 		@product = Product.get_description_by_name(params[:q])
+		render json: @product, fields: [:description]
 	end
 
 	def get_description_by_id
 		@product = Product.get_description_by_id(params[:q])
+		render json: @product, fields: [:description]
 	end
 
 	def get_bills_by_name
 		@product = Product.get_bills_by_name(params[:id])
+		#render json: @product, fields: [:bills]
 	end
 
 	def get_bills_by_id
@@ -70,17 +73,21 @@ class ProductsController < ApplicationController
 
 	def get_categories_by_name
 		@product = Product.get_categories_by_name(params[:id])
+		#render json: @product, fields: [:subcategory_id]
 	end
 
 	def get_categories_by_id
 		@product = Product.get_categories_by_id(params[:name])
+		#render json: @product, fields: [:subcategory_id]
 	end
 
 	def get_images_by_name
 		@product = Product.get_images_by_name(params[:name])
+		#render json: @product, fields: [:images]
 	end
 
 	def get_images_by_id
 		@product = Product.get_images_by_id(params[:id])
+		#render json: @product, fields: [images]
 	end
 end
