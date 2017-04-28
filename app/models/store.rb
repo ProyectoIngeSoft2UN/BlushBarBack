@@ -19,6 +19,54 @@ class Store < ApplicationRecord
     .paginate(:page => page,:per_page => per_page)
 	end
 
+  def self.get_stores_by_address(address,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('address ILIKE ?',"%#{address}%").order(col[1]+' DESC')
+      else
+        where('address ILIKE ?',"%#{address}%").order(col[0])
+      end
+    else
+      where('address ILIKE ?',"%#{address}%")
+    end
+  end
+
+  def self.get_stores_by_city(city,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('city ILIKE ?',"%#{city}%").order(col[1]+' DESC')
+      else
+        where('city ILIKE ?',"%#{city}%").order(col[0])
+      end
+    else
+      where('city ILIKE ?',"%#{city}%")
+    end
+  end
+
+  def self.get_stores_by_phone(phone,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('phone ILIKE ?',"%#{phone}%").order(col[1]+' DESC')
+      else
+        where('phone ILIKE ?',"%#{phone}%").order(col[0])
+      end
+    else
+      where('phone ILIKE ?',"%#{phone}%")
+    end
+  end
+
+  def self.get_stores_by_email(email,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('email ILIKE ?',"%#{email}%").order(col[1]+' DESC')
+      else
+        where('email ILIKE ?',"%#{email}%").order(col[0])
+      end
+    else
+      where('email ILIKE ?',"%#{email}%")
+    end
+  end
+
   def self.get_by_city(city)
     where(city: city)
   end

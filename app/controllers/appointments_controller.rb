@@ -80,4 +80,24 @@ class AppointmentsController < ApplicationController
 		render json: @appointment, fields: [:dateTime]
 	end
 
+	def get_appointments_by_paid
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@appointment = Appointment.get_appointments_by_paid(params[:is_paid],s)
+		else
+			@appointment = Appointment.get_appointments_by_paid(params[:is_paid])
+		end
+		render json: @appointment
+	end
+
+	def get_appointments_by_active
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@appointment = Appointment.get_appointments_by_active(params[:active],s)
+		else
+			@appointment = Appointment.get_appointments_by_active(params[:active])
+		end
+		render json: @appointment
+	end
+
 end

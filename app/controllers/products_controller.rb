@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
 	def index
-		render json: Product.get_products(1,14), root: "data"
+		@product = Product.get_products(1,16)
+		render json: @product
 	end
 	def list
 		Product.index
@@ -90,4 +91,45 @@ class ProductsController < ApplicationController
 		@product = Product.get_images_by_id(params[:id])
 		#render json: @product, fields: [images]
 	end
+
+	def get_products_by_name
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@product = Product.get_products_by_name(params[:name],s)
+		else
+			@product = Product.get_products_by_name(params[:name])
+		end
+		render json: @product
+	end
+
+	def get_products_by_brand
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@product = Product.get_products_by_brand(params[:brand],s)
+		else
+			@product = Product.get_products_by_brand(params[:brand])
+		end
+		render json: @product
+	end
+
+	def get_products_by_cost
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@product = Product.get_products_by_cost(params[:cost],s)
+		else
+			@product = Product.get_products_by_cost(params[:cost])
+		end
+		render json: @product
+	end
+
+	# def get_column_name
+	# 	col = params[:column_name]
+	# 	c = col.split('-')
+	# 	p c
+	# 	@product = Product.get_columns(c)
+	# 	render json: @product#, fields: [col.to_sym]
+	# end
 end

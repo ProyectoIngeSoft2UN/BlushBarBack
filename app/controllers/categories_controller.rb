@@ -62,4 +62,15 @@ class CategoriesController < ApplicationController
 	# def get_products_by_name
 	# 	@category = Category.get_products_by_name(params[:name])
 	# end
+
+	def get_categories_by_name
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@category = Category.get_categories_by_name(params[:name],s)
+		else
+			@category = Category.get_categories_by_name(params[:name])
+		end
+		render json: @category
+	end
 end

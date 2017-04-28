@@ -60,4 +60,24 @@ class ServicesController < ApplicationController
 	# 	@service = Service.get_appointments_by_name(params[:name])
 	# end
 
+  def get_services_by_name
+    if params[:sort].present?
+      s = params[:sort].split('-')
+      @service = Service.get_services_by_name(params[:name],s)
+    else
+      @service = Service.get_services_by_name(params[:name])
+    end
+    render json: @service
+  end
+
+  def get_services_by_cost
+    if params[:sort].present?
+      s = params[:sort].split('-')
+      @service = Service.get_services_by_cost(params[:cost],s)
+    else
+      @service = Service.get_services_by_cost(params[:cost])
+    end
+    render json: @service
+  end
+
 end

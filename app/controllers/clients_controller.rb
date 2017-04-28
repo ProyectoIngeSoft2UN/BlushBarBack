@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
 	end
 
 	def list
-		@admin = Client.all
+		@client = Client.all
 	end
 
 	def show
@@ -119,4 +119,49 @@ class ClientsController < ApplicationController
 	# def get_appointments_by_client_cc
 	# 	@client = Client.get_bills_by_client_cc(params[:cc])
 	# end
+end
+
+	def get_clients_by_name
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@client = Client.get_clients_by_name(params[:name],s)
+		else
+			@client = Client.get_clients_by_name(params[:name])
+		end
+		render json: @client
+	end
+
+	def get_clients_by_lastname
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@client = Client.get_clients_by_lastname(params[:lastName],s)
+		else
+			@client = Client.get_clients_by_lastname(params[:lastName])
+		end
+		render json: @client
+	end
+
+	def get_clients_by_cc
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@client = Client.get_clients_by_cc(params[:cc],s)
+		else
+			@client = Client.get_clients_by_cc(params[:cc])
+		end
+		render json: @client
+	end
+
+	def get_clients_by_email
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@client = Client.get_clients_by_email(params[:email],s)
+		else
+			@client = Client.get_clients_by_email(params[:email])
+		end
+		render json: @client
+	end
 end

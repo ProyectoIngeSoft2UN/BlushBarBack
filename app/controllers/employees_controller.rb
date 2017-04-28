@@ -103,4 +103,47 @@ class EmployeesController < ApplicationController
 	# 	@employee = Employee.get_store_by_cc(params[:cc])
 	# end
 
+	def get_employees_by_name
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@employee = Employee.get_employees_by_name(params[:name],s)
+		else
+			@employee = Employee.get_employees_by_name(params[:name])
+		end
+		render json: @employee
+	end
+
+	def get_employees_by_lastname
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@employee = Employee.get_employees_by_lastname(params[:lastName],s)
+		else
+			@employee = Employee.get_employees_by_lastname(params[:lastName])
+		end
+		render json: @employee
+	end
+
+	def get_employees_by_cc
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@employee = Employee.get_employees_by_cc(params[:cc],s)
+		else
+			@employee = Employee.get_employees_by_cc(params[:cc])
+		end
+		render json: @employee
+	end
+
+	def get_employees_by_email
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@employee = Employee.get_employees_by_email(params[:email],s)
+		else
+			@employee = Employee.get_employees_by_email(params[:email])
+		end
+		render json: @employee
+	end
 end

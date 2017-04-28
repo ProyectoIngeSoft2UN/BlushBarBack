@@ -71,4 +71,24 @@ class BillsController < ApplicationController
 		@bill = Bill.get_bills_by_cost(params[:cost],params[:page], params[:per_page])
     render json: @bill, fields: [:cost, :page, :per_page]
 	end
+
+  def get_bills_by_payment
+    if params[:sort].present?
+      s = params[:sort].split('-')
+      @bill = Bill.get_bills_by_payment(params[:payment_method],s)
+    else
+      @bill = Bill.get_bills_by_payment(params[:payment_method])
+    end
+    render json: @bill
+  end
+
+  def get_bills_by_cost
+    if params[:sort].present?
+      s = params[:sort].split('-')
+      @bill = Bill.get_bills_by_cost(params[:cost],s)
+    else
+      @bill = Bill.get_bills_by_cost(params[:cost])
+    end
+    render json: @bill
+  end
 end

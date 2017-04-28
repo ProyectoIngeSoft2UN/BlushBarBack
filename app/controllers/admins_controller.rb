@@ -93,4 +93,47 @@ class AdminsController < ApplicationController
 	# def get_store_by_cc
 	# 	@admin = Admin.get_store_by_cc(params[:cc])
 	# end
+
+	def get_admins_by_name
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@admin = Admin.get_admins_by_name(params[:name],s)
+		else
+			@admin = Admin.get_admins_by_name(params[:name])
+		end
+		render json: @admin
+	end
+
+	def get_admins_by_lastname
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@admin = Admin.get_admins_by_lastname(params[:lastName],s)
+		else
+			@admin = Admin.get_admins_by_lastname(params[:lastName])
+		end
+		render json: @admin
+	end
+
+	def get_admins_by_cc
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@admin = Admin.get_admins_by_cc(params[:cc],s)
+		else
+			@admin = Admin.get_admins_by_cc(params[:cc])
+		end
+		render json: @admin
+	end
+
+	def get_admins_by_email
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@admin = Admin.get_admins_by_email(params[:email],s)
+		else
+			@admin = Admin.get_admins_by_email(params[:email])
+		end
+		render json: @admin
 end

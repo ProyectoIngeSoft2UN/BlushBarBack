@@ -12,6 +12,32 @@ class Stockstore < ApplicationRecord
 		.paginate(:page => page,:per_page => per_page)
   end
 
+  def self.get_stockstores_by_available(available,col = nil)
+    if col.present?
+      if  col.size == 2
+        where(available: available).order(col[1]+' DESC')
+      else
+        where(available: available).order(col[0])
+      end
+    else
+      where(available: available)
+    end
+  end
+
+  def self.get_stockstores_by_cost(cost,col = nil)
+    if col.present?
+      if  col.size == 2
+        #where('CAST(cost AS TEXT) LIKE ?',"%#{cost}%").
+        order(col[1]+' DESC')
+      else
+        #where('CAST(cost AS TEXT) LIKE ?',"%#{cost}%").
+        order(col[0])
+      end
+    # else
+    #   where('CAST (cost AS TEXT) LIKE ?',"%#{cost}%")
+    end
+  end
+
   def self.is_available(q)
     select(:available).where(id: q)
   end

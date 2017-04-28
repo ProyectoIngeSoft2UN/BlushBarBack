@@ -57,4 +57,24 @@ class StockstoresController < ApplicationController
 	# end
   #
 
+  def get_stockstores_by_available
+    if params[:sort].present?
+      s = params[:sort].split('-')
+      @stockstore = Stockstore.get_stockstores_by_available(params[:available],s)
+    else
+      @stockstore = Stockstore.get_stockstores_by_available(params[:available])
+    end
+    render json: @stockstore
+  end
+
+  def get_products_by_cost
+    if params[:sort].present?
+      s = params[:sort].split('-')
+      @stockstore = Stockstore.get_stockstores_by_cost(params[:cost],s)
+    else
+      @stockstore = Stockstore.get_stockstores_by_cost(params[:cost])
+    end
+    render json: @stockstore
+  end
+
 end

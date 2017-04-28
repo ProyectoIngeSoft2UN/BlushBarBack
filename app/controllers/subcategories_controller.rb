@@ -61,4 +61,14 @@ class SubcategoriesController < ApplicationController
 	# def get_products_by_name
 	# 	@subcategory = Subcategory.get_products_by_name(params[:name])
 	# end
+
+	def get_subcategories_by_name
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@subcategory = Subcategory.get_subcategories_by_name(params[:name],s)
+		else
+			@subcategory = Subcategory.get_subcategories_by_name(params[:name])
+		end
+		render json: @subcategory
+	end
 end

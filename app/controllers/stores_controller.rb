@@ -93,4 +93,44 @@ class StoresController < ApplicationController
 	# 	@store = Store.get_available_of(params[:productid])
 	# end
 
+	def get_stores_by_address
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@store = Store.get_stores_by_address(params[:address],s)
+		else
+			@store = Store.get_stores_by_address(params[:address])
+		end
+		render json: @store
+	end
+
+	def get_stores_by_city
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@store = Store.get_stores_by_city(params[:city],s)
+		else
+			@store = Store.get_stores_by_city(params[:city])
+		end
+		render json: @store
+	end
+
+	def get_stores_by_phone
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@store = Store.get_stores_by_phone(params[:phone],s)
+		else
+			@store = Store.get_stores_by_phone(params[:phone])
+		end
+		render json: @store
+	end
+
+	def get_stores_by_email
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@store = Store.get_stores_by_email(params[:email],s)
+		else
+			@store = Store.get_stores_by_email(params[:email])
+		end
+		render json: @store
+	end
+
 end
