@@ -9,6 +9,7 @@ class BillsController < ApplicationController
 
 	def show
 		@bill = Bill.find(params[:id])
+    render json: @bill
 	end
 
 	def new
@@ -43,25 +44,31 @@ class BillsController < ApplicationController
 
 	def get_bills
 		@bill = Bill.get_bills(params[:page], params[:per_page])
+    render json: @bill, fields: [:page, :per_page]
 	end
 
 	def get_bills_by_client_id
 		@bill = Bill.get_bills_by_client_id(params[:id],params[:page], params[:per_page])
+    render json: @bill, fields: [:id, :page, :per_page]
 	end
 
 	def get_bills_by_client_cc
 		@bill = Bill.get_bills_by_client_cc(params[:cc],params[:page], params[:per_page])
+    render json: @bill, fields: [:cc, :page, :per_page]
 	end
 
 	def get_bills_by_store_id
 		@bill = Bill.get_bills_by_store_id(params[:id],params[:page], params[:per_page])
+    render json: @bill, fields: [:id, :page, :per_page]
 	end
 
 	def get_bills_by_payment_method
 		@bill = Bill.get_bills_by_payment_method(params[:pm],params[:page], params[:per_page])
+    render json: @bill, fields: [:pm, :page, :per_page]
 	end
 
 	def get_bills_by_cost
 		@bill = Bill.get_bills_by_cost(params[:cost],params[:page], params[:per_page])
+    render json: @bill, fields: [:cost, :page, :per_page]
 	end
 end

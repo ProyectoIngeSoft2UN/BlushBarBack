@@ -5,6 +5,8 @@ class ImagesController < ApplicationController
   end
 
   def show
+    @image = Image.find(params[:id])
+    render json: @image
   end
 
   # GET /uploads/new

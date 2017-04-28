@@ -11,6 +11,7 @@ class AdminsController < ApplicationController
 
 	def show
 		@admin = Admin.find(params[:id])
+		render json: @admin
 	end
 
 	def new
@@ -45,49 +46,51 @@ class AdminsController < ApplicationController
 
 	def get_by_id
 		@admin = Admin.get_by_id(params[:id])
+		render json: @admin
 	end
 
 	def get_by_cc
 		@admin = Admin.get_by_id(params[:cc])
+		render json: @admin
 	end
-
-	def get_name_by_id
-		@admin = Admin.get_name_by_id(params[:id])
-	end
-
-	def get_name_by_cc
-		@admin = Admin.get_name_by_cc(params[:cc])
-	end
-
-	def get_lastName_by_id
-		@admin = Admin.get_lastName_by_id(params[:id])
-	end
-
-	def get_lastName_by_cc
-		@admin = Admin.get_lastName_by_cc(params[:cc])
-	end
-
-	def get_email_by_id
-		@admin = Admin.get_email_by_id(params[:id])
-	end
-
-	def get_email_by_cc
-		@admin = Admin.get_email_by_cc(params[:cc])
-	end
-
-	def get_phone_by_id
-		@admin = Admin.get_phone_by_id(params[:id])
-	end
-
-	def get_phone_by_cc
-		@admin = Admin.get_phone_by_cc(params[:cc])
-	end
-
-	def get_store_by_id
-		@admin = Admin.get_store_by_id(params[:id])
-	end
-
-	def get_store_by_cc
-		@admin = Admin.get_store_by_cc(params[:cc])
-	end
+	#
+	# def get_name_by_id
+	# 	@admin = Admin.get_name_by_id(params[:id])
+	# end
+	#
+	# def get_name_by_cc
+	# 	@admin = Admin.get_name_by_cc(params[:cc])
+	# end
+	#
+	# def get_lastName_by_id
+	# 	@admin = Admin.get_lastName_by_id(params[:id])
+	# end
+	#
+	# def get_lastName_by_cc
+	# 	@admin = Admin.get_lastName_by_cc(params[:cc])
+	# end
+	#
+	# def get_email_by_id
+	# 	@admin = Admin.get_email_by_id(params[:id])
+	# end
+	#
+	# def get_email_by_cc
+	# 	@admin = Admin.get_email_by_cc(params[:cc])
+	# end
+	#
+	# def get_phone_by_id
+	# 	@admin = Admin.get_phone_by_id(params[:id])
+	# end
+	#
+	# def get_phone_by_cc
+	# 	@admin = Admin.get_phone_by_cc(params[:cc])
+	# end
+	#
+	# def get_store_by_id
+	# 	@admin = Admin.get_store_by_id(params[:id])
+	# end
+	#
+	# def get_store_by_cc
+	# 	@admin = Admin.get_store_by_cc(params[:cc])
+	# end
 end

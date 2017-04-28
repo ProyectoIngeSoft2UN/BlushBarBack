@@ -13,6 +13,14 @@ Rails.application.routes.draw do
     root to: 'appointments#index'
   end
 
+  resources :subcategories do
+    root to: 'subcategories#index'
+  end
+
+  resources :references do
+    root to: 'references#index'
+  end
+
   resources :bills do
     root to: 'bills#index'
   end
@@ -70,7 +78,11 @@ Rails.application.routes.draw do
   	end
   end
 
-  resources :images
+  resources :images do
+    member do
+      get 'path', to: 'images#get_path'
+    end
+  end
   # resources :products
   resources :categories do
     root to: 'categories#index'

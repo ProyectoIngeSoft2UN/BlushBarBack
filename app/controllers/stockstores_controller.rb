@@ -8,6 +8,7 @@ class StockstoresController < ApplicationController
 
 	def show
 		@stockstore = Stockstore.find(params[:id])
+    render json: @stockstore
 	end
 
 	def new
@@ -38,22 +39,22 @@ class StockstoresController < ApplicationController
 		@stockstore.destroy
 		redirect_to action: "list"
 	end
-
-	def is_available_by_id
-		@stockstore = Stockstore.is_available_by_id(params[:q])
-	end
-
-	def get_quantity_by_id
-		@stockstore = Stockstore.get_quantity_by_id(params[:q])
-	end
-
-	def get_available_of
-		@stockstore = Stockstore.get_available_of(params[:productid])
-	end
-
-	def get_stores_of
-		@stockstore = Stockstore.get_stores_of(params[:storeid])
-	end
-
+  #
+	# def is_available_by_id
+	# 	@stockstore = Stockstore.is_available_by_id(params[:q])
+	# end
+  #
+	# def get_quantity_by_id
+	# 	@stockstore = Stockstore.get_quantity_by_id(params[:q])
+	# end
+  #
+	# def get_available_of
+	# 	@stockstore = Stockstore.get_available_of(params[:productid])
+	# end
+  #
+	# def get_stores_of
+	# 	@stockstore = Stockstore.get_stores_of(params[:storeid])
+	# end
+  #
 
 end
