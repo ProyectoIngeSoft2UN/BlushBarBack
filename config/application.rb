@@ -32,5 +32,6 @@ module BlushBarBack
       end
     end
     config.api_only = true
+    config.middleware.use Rack::Attack
   end
 end
