@@ -121,13 +121,34 @@ class ClientsController < ApplicationController
 	# end
 end
 
+	def get_clients_query
+		if params[:sort].present?
+			s = params[:sort].split(',')
+			@client = Client.get_clients_query(params[:q],s)
+		else
+			@client = Client.get_clients_query(params[:q])
+		end
+		if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+			i = []
+			s.each do |e|
+				if !Client.column_names.include?(e)
+					i.push(e)
+				end
+			end
+			render json: @client, fields: s, include: i
+		else
+			render json: @client
+		end
+	end
+
 	def get_clients_by_name
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@client = Client.get_clients_by_name(params[:name],s)
+			@client = Client.get_clients_by_name(params[:q],s)
 		else
-			@client = Client.get_clients_by_name(params[:name])
+			@client = Client.get_clients_by_name(params[:q])
 		end
 		render json: @client
 	end
@@ -136,9 +157,9 @@ end
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@client = Client.get_clients_by_lastname(params[:lastName],s)
+			@client = Client.get_clients_by_lastname(params[:q],s)
 		else
-			@client = Client.get_clients_by_lastname(params[:lastName])
+			@client = Client.get_clients_by_lastname(params[:q])
 		end
 		render json: @client
 	end
@@ -147,9 +168,9 @@ end
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@client = Client.get_clients_by_cc(params[:cc],s)
+			@client = Client.get_clients_by_cc(params[:q],s)
 		else
-			@client = Client.get_clients_by_cc(params[:cc])
+			@client = Client.get_clients_by_cc(params[:q])
 		end
 		render json: @client
 	end
@@ -158,9 +179,9 @@ end
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@client = Client.get_clients_by_email(params[:email],s)
+			@client = Client.get_clients_by_email(params[:q],s)
 		else
-			@client = Client.get_clients_by_email(params[:email])
+			@client = Client.get_clients_by_email(params[:q])
 		end
 		render json: @client
 	end

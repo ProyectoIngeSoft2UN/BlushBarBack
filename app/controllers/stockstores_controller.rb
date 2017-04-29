@@ -60,9 +60,9 @@ class StockstoresController < ApplicationController
   def get_stockstores_by_available
     if params[:sort].present?
       s = params[:sort].split('-')
-      @stockstore = Stockstore.get_stockstores_by_available(params[:available],s)
+      @stockstore = Stockstore.get_stockstores_by_available(params[:q],s)
     else
-      @stockstore = Stockstore.get_stockstores_by_available(params[:available])
+      @stockstore = Stockstore.get_stockstores_by_available(params[:q])
     end
     render json: @stockstore
   end
@@ -70,9 +70,9 @@ class StockstoresController < ApplicationController
   def get_products_by_cost
     if params[:sort].present?
       s = params[:sort].split('-')
-      @stockstore = Stockstore.get_stockstores_by_cost(params[:cost],s)
+      @stockstore = Stockstore.get_stockstores_by_cost(params[:q],s)
     else
-      @stockstore = Stockstore.get_stockstores_by_cost(params[:cost])
+      @stockstore = Stockstore.get_stockstores_by_cost(params[:q])
     end
     render json: @stockstore
   end

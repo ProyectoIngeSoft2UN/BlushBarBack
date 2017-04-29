@@ -75,20 +75,31 @@ class BillsController < ApplicationController
   def get_bills_by_payment
     if params[:sort].present?
       s = params[:sort].split('-')
-      @bill = Bill.get_bills_by_payment(params[:payment_method],s)
+      @bill = Bill.get_bills_by_payment(params[:q],s)
     else
-      @bill = Bill.get_bills_by_payment(params[:payment_method])
+      @bill = Bill.get_bills_by_payment(params[:q])
     end
     render json: @bill
   end
 
   def get_bills_by_cost
     if params[:sort].present?
-      s = params[:sort].split('-')
-      @bill = Bill.get_bills_by_cost(params[:cost],s)
+      s = params[:sort].split(',')
+      @bill = Bill.get_bills_by_cost(params[:q],s)
     else
-      @bill = Bill.get_bills_by_cost(params[:cost])
+      @bill = Bill.get_bills_by_cost(params[:q])
     end
-    render json: @bill
+    if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+      i = []
+      s.each do |e|
+        if !Bill.column_names.include?(e)
+          i.push(e)
+        end
+      end
+			render json: @bill, fields: s, include: i
+		else
+			render json: @bill
+		end
   end
 end

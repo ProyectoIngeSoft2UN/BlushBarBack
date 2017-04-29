@@ -19,6 +19,25 @@ class Store < ApplicationRecord
     .paginate(:page => page,:per_page => per_page)
 	end
 
+  def self.get_stores_query(q,col = nil)
+    if col.present?
+      cols = ""
+      col.each do |v|
+        t = v.split('-')
+        if t.size == 2
+          cols += t[1]+' DESC, '
+        else
+          cols +=  t[0]+' ASC, '
+        end
+      end
+      cols = cols.slice(0..-3)
+      where('address ILIKE ? OR city ILIKE ? OR phone ILIKE ? OR email ILIKE ?',"%#{q}%","%#{q}%","%#{q}%","%#{q}%")
+      .order(cols)
+    else
+      where('address ILIKE ? OR city ILIKE ? OR phone ILIKE ? OR email ILIKE ?',"%#{q}%","%#{q}%","%#{q}%","%#{q}%")
+    end
+  end
+
   def self.get_stores_by_address(address,col = nil)
     if col.present?
       if  col.size == 2

@@ -98,9 +98,9 @@ class AdminsController < ApplicationController
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@admin = Admin.get_admins_by_name(params[:name],s)
+			@admin = Admin.get_admins_by_name(params[:q],s)
 		else
-			@admin = Admin.get_admins_by_name(params[:name])
+			@admin = Admin.get_admins_by_name(params[:q])
 		end
 		render json: @admin
 	end
@@ -109,9 +109,9 @@ class AdminsController < ApplicationController
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@admin = Admin.get_admins_by_lastname(params[:lastName],s)
+			@admin = Admin.get_admins_by_lastname(params[:q],s)
 		else
-			@admin = Admin.get_admins_by_lastname(params[:lastName])
+			@admin = Admin.get_admins_by_lastname(params[:q])
 		end
 		render json: @admin
 	end
@@ -120,9 +120,9 @@ class AdminsController < ApplicationController
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@admin = Admin.get_admins_by_cc(params[:cc],s)
+			@admin = Admin.get_admins_by_cc(params[:q],s)
 		else
-			@admin = Admin.get_admins_by_cc(params[:cc])
+			@admin = Admin.get_admins_by_cc(params[:q])
 		end
 		render json: @admin
 	end
@@ -131,9 +131,31 @@ class AdminsController < ApplicationController
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@admin = Admin.get_admins_by_email(params[:email],s)
+			@admin = Admin.get_admins_by_email(params[:q],s)
 		else
-			@admin = Admin.get_admins_by_email(params[:email])
+			@admin = Admin.get_admins_by_email(params[:q])
 		end
 		render json: @admin
+	end
+
+	def get_admins_query
+		if params[:sort].present?
+			s = params[:sort].split(',')
+			@admin = Admin.get_admins_query(params[:q],s)
+		else
+			@admin = Admin.get_admins_query(params[:q])
+		end
+		if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+			i = []
+			s.each do |e|
+				if !Admin.column_names.include?(e)
+					i.push(e)
+				end
+			end
+			render json: @admin, fields: s, include: i
+		else
+			render json: @admin
+		end
+	end
 end

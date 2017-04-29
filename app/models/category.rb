@@ -22,6 +22,18 @@ class Category < ApplicationRecord
     end
   end
 
+	def self.get_categories_query(q,col = nil)
+		if col.present?
+			if  col.size == 2
+				where('name ILIKE ? OR description ILIKE ?',"%#{q}%","%#{q}%").order(col[1]+' DESC')
+			else
+				where('name ILIKE ? OR description ILIKE ?',"%#{q}%","%#{q}%").order(col[0])
+			end
+		else
+			where('name ILIKE ? OR description ILIKE ?',"%#{q}%","%#{q}%")
+		end
+	end
+
 	def self.get_subcategories_by_id(id, page,per_page)
 		includes(:subcategories).where(id: id)
 		.paginate(:page => page,:per_page => per_page)

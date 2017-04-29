@@ -95,10 +95,9 @@ class ProductsController < ApplicationController
 	def get_products_by_name
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			p s
-			@product = Product.get_products_by_name(params[:name],s)
+			@product = Product.get_products_by_name(params[:q],s)
 		else
-			@product = Product.get_products_by_name(params[:name])
+			@product = Product.get_products_by_name(params[:q])
 		end
 		render json: @product
 	end
@@ -106,21 +105,40 @@ class ProductsController < ApplicationController
 	def get_products_by_brand
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			p s
-			@product = Product.get_products_by_brand(params[:brand],s)
+			@product = Product.get_products_by_brand(params[:q],s)
 		else
-			@product = Product.get_products_by_brand(params[:brand])
+			@product = Product.get_products_by_brand(params[:q])
 		end
 		render json: @product
+	end
+
+	def get_products_query
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@product = Product.get_products_query(params[:q],s)
+		else
+			@product = Product.get_products_query(params[:q])
+		end
+		if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+			i = []
+			s.each do |e|
+				if !Product.column_names.include?(e)
+					i.push(e)
+				end
+			end
+			render json: @product, fields: s, include: i
+		else
+			render json: @product
+		end
 	end
 
 	def get_products_by_cost
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			p s
-			@product = Product.get_products_by_cost(params[:cost],s)
+			@product = Product.get_products_by_cost(params[:q],s)
 		else
-			@product = Product.get_products_by_cost(params[:cost])
+			@product = Product.get_products_by_cost(params[:q])
 		end
 		render json: @product
 	end

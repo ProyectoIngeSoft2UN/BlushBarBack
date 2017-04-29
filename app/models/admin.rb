@@ -28,15 +28,15 @@ class Admin < ApplicationRecord
     end
   end
 
-  def self.get_admins_by_lastname(lastName,col = nil)
+  def self.get_admins_by_lastname(q,col = nil)
     if col.present?
       if  col.size == 2
-        where('lastName ILIKE ?',"%#{lastName}%").order(col[1]+' DESC')
+        where('"lastName" ILIKE ?',"%#{q}%").order(col[1]+' DESC')
       else
-        where('lastName ILIKE ?',"%#{lastName}%").order(col[0])
+        where('"lastName" ILIKE ?',"%#{q}%").order(col[0])
       end
     else
-      where('lastName ILIKE ?',"%#{lastName}%")
+      where('"lastName" ILIKE ?',"%#{q}%")
     end
   end
 
@@ -61,6 +61,20 @@ class Admin < ApplicationRecord
       end
     else
       where('email ILIKE ?',"%#{email}%")
+    end
+  end
+
+  def self.get_admins_query(q,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('name ILIKE ? OR "lastName" ILIKE ? OR cc ILIKE ? OR email ILIKE ?',"%#{q}%","%#{q}%","%#{q}%","%#{q}%")
+        .order(col[1]+' DESC')
+      else
+        where('name ILIKE ? OR "lastName" ILIKE ? OR cc ILIKE ? OR email ILIKE ?',"%#{q}%","%#{q}%","%#{q}%","%#{q}%")
+        .order(col[0])
+      end
+    else
+      where('name ILIKE ? OR "lastName" ILIKE ? OR cc ILIKE ? OR email ILIKE ?',"%#{q}%","%#{q}%","%#{q}%","%#{q}%")
     end
   end
 

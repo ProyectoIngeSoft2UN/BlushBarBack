@@ -66,6 +66,20 @@ class Client < ApplicationRecord
     end
   end
 
+  def self.get_clients_query(q,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('name ILIKE ? OR "lastName" ILIKE ? OR cc ILIKE ? OR email ILIKE ?',"%#{q}%","%#{q}%","%#{q}%","%#{q}%")
+        .order(col[1]+' DESC')
+      else
+        where('name ILIKE ? OR "lastName" ILIKE ? OR cc ILIKE ? OR email ILIKE ?',"%#{q}%","%#{q}%","%#{q}%","%#{q}%")
+        .order(col[0])
+      end
+    else
+      where('name ILIKE ? OR "lastName" ILIKE ? OR cc ILIKE ? OR email ILIKE ?',"%#{q}%","%#{q}%","%#{q}%","%#{q}%")
+    end
+  end
+
 	def self.get_by_id(id)
 		select(:cc,:name,:lastName,:email,:phone).where(id: id)
 	end

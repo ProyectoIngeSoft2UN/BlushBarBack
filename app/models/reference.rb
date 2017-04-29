@@ -21,6 +21,18 @@ class Reference < ApplicationRecord
     end
   end
 
+  def self.get_references_query(q,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('name ILIKE ?',"%#{q}%").order(col[1]+' DESC')
+      else
+        where('name ILIKE ?',"%#{q}%").order(col[0])
+      end
+    else
+      where('name ILIKE ?',"%#{q}%")
+    end
+  end
+
   def self.get_product_of(name)
     includes(:product).where(name: name)
   end

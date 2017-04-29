@@ -24,6 +24,18 @@ class Product < ApplicationRecord
   #   end
   # end
 
+  def self.get_products_query(name,col = nil)
+    if col.present?
+      if  col.size == 2
+        where('name ILIKE ? OR brand ILIKE ?',"%#{name}%","%#{name}%").order(col[1]+' DESC')
+      else
+        where('name ILIKE ? OR brand ILIKE ?',"%#{name}%","%#{name}%").order(col[0])
+      end
+    else
+      where('name ILIKE ? OR brand ILIKE ?',"%#{name}%","%#{name}%")
+    end
+  end
+
   def self.get_products_by_name(name,col = nil)
     if col.present?
       if  col.size == 2

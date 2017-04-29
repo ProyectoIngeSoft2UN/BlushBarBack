@@ -60,12 +60,33 @@ class ServicesController < ApplicationController
 	# 	@service = Service.get_appointments_by_name(params[:name])
 	# end
 
+  def get_services_query
+    if params[:sort].present?
+      s = params[:sort].split('-')
+      @service = Service.get_services_query(params[:q],s)
+    else
+      @service = Service.get_services_query(params[:q])
+    end
+    if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+      i = []
+      s.each do |e|
+        if !Service.column_names.include?(e)
+          i.push(e)
+        end
+      end
+			render json: @service, fields: s, include: i
+		else
+			render json: @service
+		end
+  end
+
   def get_services_by_name
     if params[:sort].present?
       s = params[:sort].split('-')
-      @service = Service.get_services_by_name(params[:name],s)
+      @service = Service.get_services_by_name(params[:q],s)
     else
-      @service = Service.get_services_by_name(params[:name])
+      @service = Service.get_services_by_name(params[:q])
     end
     render json: @service
   end
@@ -73,9 +94,9 @@ class ServicesController < ApplicationController
   def get_services_by_cost
     if params[:sort].present?
       s = params[:sort].split('-')
-      @service = Service.get_services_by_cost(params[:cost],s)
+      @service = Service.get_services_by_cost(params[:q],s)
     else
-      @service = Service.get_services_by_cost(params[:cost])
+      @service = Service.get_services_by_cost(params[:q])
     end
     render json: @service
   end

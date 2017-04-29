@@ -93,12 +93,33 @@ class StoresController < ApplicationController
 	# 	@store = Store.get_available_of(params[:productid])
 	# end
 
+	def get_stores_query
+		if params[:sort].present?
+			s = params[:sort].split(',')
+			@store = Store.get_stores_query(params[:q],s)
+		else
+			@store = Store.get_stores_query(params[:q])
+		end
+		if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+			i = []
+			s.each do |e|
+				if !Store.column_names.include?(e)
+					i.push(e)
+				end
+			end
+			render json: @store, fields: s, include: i
+		else
+			render json: @store
+		end
+	end
+
 	def get_stores_by_address
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			@store = Store.get_stores_by_address(params[:address],s)
+			@store = Store.get_stores_by_address(params[:q],s)
 		else
-			@store = Store.get_stores_by_address(params[:address])
+			@store = Store.get_stores_by_address(params[:q])
 		end
 		render json: @store
 	end
@@ -106,9 +127,9 @@ class StoresController < ApplicationController
 	def get_stores_by_city
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			@store = Store.get_stores_by_city(params[:city],s)
+			@store = Store.get_stores_by_city(params[:q],s)
 		else
-			@store = Store.get_stores_by_city(params[:city])
+			@store = Store.get_stores_by_city(params[:q])
 		end
 		render json: @store
 	end
@@ -116,9 +137,9 @@ class StoresController < ApplicationController
 	def get_stores_by_phone
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			@store = Store.get_stores_by_phone(params[:phone],s)
+			@store = Store.get_stores_by_phone(params[:q],s)
 		else
-			@store = Store.get_stores_by_phone(params[:phone])
+			@store = Store.get_stores_by_phone(params[:q])
 		end
 		render json: @store
 	end
@@ -126,9 +147,9 @@ class StoresController < ApplicationController
 	def get_stores_by_email
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			@store = Store.get_stores_by_email(params[:email],s)
+			@store = Store.get_stores_by_email(params[:q],s)
 		else
-			@store = Store.get_stores_by_email(params[:email])
+			@store = Store.get_stores_by_email(params[:q])
 		end
 		render json: @store
 	end

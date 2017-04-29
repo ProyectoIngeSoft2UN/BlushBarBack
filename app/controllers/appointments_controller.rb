@@ -83,9 +83,9 @@ class AppointmentsController < ApplicationController
 	def get_appointments_by_paid
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			@appointment = Appointment.get_appointments_by_paid(params[:is_paid],s)
+			@appointment = Appointment.get_appointments_by_paid(params[:q],s)
 		else
-			@appointment = Appointment.get_appointments_by_paid(params[:is_paid])
+			@appointment = Appointment.get_appointments_by_paid(params[:q])
 		end
 		render json: @appointment
 	end
@@ -93,11 +93,42 @@ class AppointmentsController < ApplicationController
 	def get_appointments_by_active
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			@appointment = Appointment.get_appointments_by_active(params[:active],s)
+			@appointment = Appointment.get_appointments_by_active(params[:q],s)
 		else
-			@appointment = Appointment.get_appointments_by_active(params[:active])
+			@appointment = Appointment.get_appointments_by_active(params[:q])
 		end
 		render json: @appointment
+	end
+
+	def get_appointments_by_datetime
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@appointment = Appointment.get_appointments_by_datetime(params[:q],s)
+		else
+			@appointment = Appointment.get_appointments_by_datetime(params[:q])
+		end
+		render json: @appointment
+	end
+
+	def get_appointments_query
+		if params[:sort].present?
+			s = params[:sort].split(',')
+			@appointment = Appointment.get_appointments_query(params[:q],s)
+		else
+			@appointment = Appointment.get_appointments_query(params[:q])
+		end
+		if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+			i = []
+			s.each do |e|
+				if !Appointment.column_names.include?(e)
+					i.push(e)
+				end
+			end
+			render json: @appointment, fields: s, include: i
+		else
+			render json: @appointment
+		end
 	end
 
 end

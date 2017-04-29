@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   #resources de rutas creadas para la serializacion
   resources :appointments do
     collection do
-      get 'search_by_paid', to: 'appointments#get_appointments_by_paid'
-      get 'search_by_active', to: 'appointments#get_appointments_by_active'
+      get 'search_by_datetime', to: 'appointments#get_appointments_by_datetime'
+      get 'search', to: 'appointments#get_appointments_query'
     end
     root to: 'appointments#index'
   end
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :subcategories do
     collection do
       get 'search_by_name', to: 'subcategories#get_subcategories_by_name'
+      get 'search', to: 'subcategories#get_subcategories_query'
     end
     root to: 'subcategories#index'
   end
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   resources :references do
     collection do
       get 'search_by_name', to: 'references#get_references_by_name'
+      get 'search', to: 'references#get_references_query'
     end
     root to: 'references#index'
   end
@@ -47,6 +49,7 @@ Rails.application.routes.draw do
     collection do
       get 'search_by_name', to: 'services#get_services_by_name'
       get 'search_by_cost', to: 'services#get_services_by_cost'
+      get 'search', to: 'services#get_services_query'
     end
     root to: 'services#index'
   end
@@ -69,6 +72,7 @@ Rails.application.routes.draw do
       get 'search_by_name', to: 'products#get_products_by_name'
       get 'search_by_brand', to: 'products#get_products_by_brand'
       get 'search_by_cost', to: 'products#get_products_by_cost'
+      get 'search', to: 'products#get_products_query'
     end
     get 'bills', to: 'products#get_bills_by_id'
     member do
@@ -89,6 +93,7 @@ Rails.application.routes.draw do
       get 'search_by_city', to: 'stores#get_stores_by_city'
       get 'search_by_phone', to: 'stores#get_stores_by_phone'
       get 'search_by_email', to: 'stores#get_stores_by_email'
+      get 'search', to: 'stores#get_stores_query'
     end
     root to: 'stores#index'
   end
@@ -99,6 +104,7 @@ Rails.application.routes.draw do
       get 'search_by_lastname', to: 'admins#get_admins_by_lastname'
       get 'search_by_cc', to: 'admins#get_admins_by_cc'
       get 'search_by_email', to: 'admins#get_admins_by_email'
+      get 'search', to: 'admins#get_admins_query'
     end
     root to: 'admins#index'
   	resources :stores
@@ -110,17 +116,19 @@ Rails.application.routes.draw do
       get 'search_by_lastname', to: 'clients#get_clients_by_lastname'
       get 'search_by_cc', to: 'clients#get_clients_by_cc'
       get 'search_by_email', to: 'clients#get_clients_by_email'
+      get 'search', to: 'clients#get_clients_query'
     end
     root to: 'clients#index'
   	resources :purchases, :appointments
   end
 
-  resources :employee do
+  resources :employees do
     collection do
       get 'search_by_name', to: 'employees#get_employees_by_name'
       get 'search_by_lastname', to: 'employees#get_employees_by_lastname'
       get 'search_by_cc', to: 'employees#get_employees_by_cc'
       get 'search_by_email', to: 'employees#get_employees_by_email'
+      get 'search', to: 'employees#get_employees_query'
     end
     root to: 'employee#index'
   	resources :appointments;
@@ -144,6 +152,7 @@ Rails.application.routes.draw do
   resources :categories do
     collection do
       get 'search_by_name', to: 'categories#get_categories_by_name'
+      get 'search', to: 'categories#get_categories_query'
     end
     root to: 'categories#index'
   	resources :products, only: [:list, :show]

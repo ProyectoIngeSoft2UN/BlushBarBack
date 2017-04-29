@@ -103,13 +103,34 @@ class EmployeesController < ApplicationController
 	# 	@employee = Employee.get_store_by_cc(params[:cc])
 	# end
 
+	def get_employees_query
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@employee = Employee.get_employees_query(params[:q],s)
+		else
+			@employee = Employee.get_employees_query(params[:q])
+		end
+		if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+			i = []
+			s.each do |e|
+				if !Employee.column_names.include?(e)
+					i.push(e)
+				end
+			end
+			render json: @employee, fields: s, include: i
+		else
+			render json: @employee
+		end
+	end
+
 	def get_employees_by_name
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@employee = Employee.get_employees_by_name(params[:name],s)
+			@employee = Employee.get_employees_by_name(params[:q],s)
 		else
-			@employee = Employee.get_employees_by_name(params[:name])
+			@employee = Employee.get_employees_by_name(params[:q])
 		end
 		render json: @employee
 	end
@@ -118,9 +139,9 @@ class EmployeesController < ApplicationController
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@employee = Employee.get_employees_by_lastname(params[:lastName],s)
+			@employee = Employee.get_employees_by_lastname(params[:q],s)
 		else
-			@employee = Employee.get_employees_by_lastname(params[:lastName])
+			@employee = Employee.get_employees_by_lastname(params[:q])
 		end
 		render json: @employee
 	end
@@ -129,9 +150,9 @@ class EmployeesController < ApplicationController
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@employee = Employee.get_employees_by_cc(params[:cc],s)
+			@employee = Employee.get_employees_by_cc(params[:q],s)
 		else
-			@employee = Employee.get_employees_by_cc(params[:cc])
+			@employee = Employee.get_employees_by_cc(params[:q])
 		end
 		render json: @employee
 	end
@@ -140,9 +161,9 @@ class EmployeesController < ApplicationController
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@employee = Employee.get_employees_by_email(params[:email],s)
+			@employee = Employee.get_employees_by_email(params[:q],s)
 		else
-			@employee = Employee.get_employees_by_email(params[:email])
+			@employee = Employee.get_employees_by_email(params[:q])
 		end
 		render json: @employee
 	end

@@ -42,15 +42,42 @@ class Appointment < ApplicationRecord
     end
   end
 
-  def self.get_appointments_by_datetime(datetime,col = nil)
+  def self.get_appointments_query(q,col = nil)
     if col.present?
       if  col.size == 2
-        where(dateTime: dateTime).order(col[1]+' DESC')
+        where('is_paid = ? OR active = ?',q,q).order(col[1]+' DESC')
       else
-        where(dateTime: dateTime).order(col[0])
+        where('is_paid = ? OR active = ?',q,q).order(col[0])
       end
-    # else
-    #   where(active: active)
+    else
+      where('is_paid = ? OR active = ?',q,q)
+    end
+  end
+
+
+  def self.get_appointments_by_datetime(datetime,col = nil)
+    p datetime
+    t = datetime.split('-')
+    p t
+    if t[0] == 'today'
+      s = DateTime.now.change(hour: 0)
+    elsif t[1] == 'daysago' || t[0] == 'yesterday'
+      s = DateTime.now.change(hour: 0) - datetime[0].to_i
+    elsif t[1] == 'weeksago'
+      s = DateTime.now.change(hour: 0) - datetime[0].to_i*7
+    elsif t[1] == 'monthsago'
+      s = DateTime.now.change(hour: 0) - datetime[0].to_i*30
+    elsif t[1] == 'yearsago'
+      s = DateTime.now.change(hour: 0) - datetime[0].to_i*365
+    end
+    if col.present?
+      if  col.size == 2
+        where('dateTime > ?',s).order(col[1]+' DESC')
+      else
+        where('dateTime > ?',s).order(col[0])
+      end
+    else
+      where('"dateTime" > ?',s)
     end
   end
 

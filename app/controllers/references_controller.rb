@@ -43,13 +43,35 @@ class ReferencesController < ApplicationController
 		@reference = Reference.get_images_by_id(params[:id])
 	end
 
+	def get_references_query
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			p s
+			@reference = Reference.get_references_query(params[:q],s)
+		else
+			@reference = Reference.get_references_query(params[:q])
+		end
+		if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+			i = []
+			s.each do |e|
+				if !Reference.column_names.include?(e)
+					i.push(e)
+				end
+			end
+			render json: @reference, fields: s, include: i
+		else
+			render json: @reference
+		end
+	end
+
 	def get_references_by_name
 		if params[:sort].present?
 			s = params[:sort].split('-')
 			p s
-			@reference = Reference.get_references_by_name(params[:name],s)
+			@reference = Reference.get_references_by_name(params[:q],s)
 		else
-			@reference = Reference.get_references_by_name(params[:name])
+			@reference = Reference.get_references_by_name(params[:q])
 		end
 		render json: @reference
 	end

@@ -63,14 +63,24 @@ class CategoriesController < ApplicationController
 	# 	@category = Category.get_products_by_name(params[:name])
 	# end
 
-	def get_categories_by_name
+	def get_categories_query
 		if params[:sort].present?
-			s = params[:sort].split('-')
-			p s
-			@category = Category.get_categories_by_name(params[:name],s)
+			s = params[:sort].split(',')
+			@category = Category.get_categories_query(params[:q],s)
 		else
-			@category = Category.get_categories_by_name(params[:name])
+			@category = Category.get_categories_query(params[:q])
 		end
-		render json: @category
+		if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+			i = []
+			s.each do |e|
+				if !Category.column_names.include?(e)
+					i.push(e)
+				end
+			end
+			render json: @category, fields: s, include: i
+		else
+			render json: @category
+		end
 	end
 end

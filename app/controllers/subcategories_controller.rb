@@ -62,12 +62,33 @@ class SubcategoriesController < ApplicationController
 	# 	@subcategory = Subcategory.get_products_by_name(params[:name])
 	# end
 
+	def get_subcategories_query
+		if params[:sort].present?
+			s = params[:sort].split('-')
+			@subcategory = Subcategory.get_subcategories_query(params[:q],s)
+		else
+			@subcategory = Subcategory.get_subcategories_query(params[:q])
+		end
+		if params[:select].present?
+			s = params[:select].split(',').map { |e| e.to_sym }
+			i = []
+			s.each do |e|
+				if !Subcategory.column_names.include?(e)
+					i.push(e)
+				end
+			end
+			render json: @subcategory, fields: s, include: i
+		else
+			render json: @subcategory
+		end
+	end
+
 	def get_subcategories_by_name
 		if params[:sort].present?
 			s = params[:sort].split('-')
-			@subcategory = Subcategory.get_subcategories_by_name(params[:name],s)
+			@subcategory = Subcategory.get_subcategories_by_name(params[:q],s)
 		else
-			@subcategory = Subcategory.get_subcategories_by_name(params[:name])
+			@subcategory = Subcategory.get_subcategories_by_name(params[:q])
 		end
 		render json: @subcategory
 	end
