@@ -10,30 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422230200) do
+ActiveRecord::Schema.define(version: 20170505051905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
-    t.string   "cc",                                  null: false
-    t.string   "name",                                null: false
-    t.string   "lastName",                            null: false
-    t.string   "email",                               null: false
-    t.string   "phone",                               null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "cc",                                       null: false
+    t.string   "name",                                     null: false
+    t.string   "lastName",                                 null: false
+    t.string   "email",                                    null: false
+    t.string   "phone",                                    null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "provider",               default: "email", null: false
+    t.string   "uid",                    default: "",      null: false
+    t.string   "encrypted_password",     default: "",      null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,       null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.json     "tokens"
+    t.index ["confirmation_token"], name: "index_admins_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+    t.index ["uid", "provider"], name: "index_admins_on_uid_and_provider", unique: true, using: :btree
   end
 
   create_table "appointments", force: :cascade do |t|
@@ -81,50 +90,68 @@ ActiveRecord::Schema.define(version: 20170422230200) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "cc",                                  null: false
-    t.string   "name",                                null: false
-    t.string   "lastName",                            null: false
-    t.string   "email",                               null: false
-    t.string   "phone",                               null: false
+    t.string   "cc",                                       null: false
+    t.string   "name",                                     null: false
+    t.string   "lastName",                                 null: false
+    t.string   "email",                                    null: false
+    t.string   "phone",                                    null: false
     t.string   "address"
     t.string   "string"
     t.string   "city"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "provider",               default: "email", null: false
+    t.string   "uid",                    default: "",      null: false
+    t.string   "encrypted_password",     default: "",      null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,       null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.json     "tokens"
+    t.index ["confirmation_token"], name: "index_clients_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true, using: :btree
+    t.index ["uid", "provider"], name: "index_clients_on_uid_and_provider", unique: true, using: :btree
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "cc",                                  null: false
-    t.string   "name",                                null: false
-    t.string   "lastName",                            null: false
-    t.string   "email",                               null: false
-    t.string   "phone",                               null: false
-    t.integer  "store_id",                            null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "cc",                                       null: false
+    t.string   "name",                                     null: false
+    t.string   "lastName",                                 null: false
+    t.string   "email",                                    null: false
+    t.string   "phone",                                    null: false
+    t.integer  "store_id",                                 null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "provider",               default: "email", null: false
+    t.string   "uid",                    default: "",      null: false
+    t.string   "encrypted_password",     default: "",      null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,       null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.json     "tokens"
+    t.index ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
     t.index ["store_id"], name: "index_employees_on_store_id", using: :btree
+    t.index ["uid", "provider"], name: "index_employees_on_uid_and_provider", unique: true, using: :btree
   end
 
   create_table "images", force: :cascade do |t|

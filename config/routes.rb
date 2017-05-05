@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :employees
-  devise_for :clients
+  mount_devise_token_auth_for 'Employee', at: 'auth'
+
+  mount_devise_token_auth_for 'Client', at: 'auth'
+
+  mount_devise_token_auth_for 'Admin', at: 'admin_auth'
+  as :admin do
+    # Define routes for Admin within this block.
+  end
+  as :client do
+    # Define routes for Client within this block.
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # root 'welcome#index'
   # resources :clients, :employees, :stores, :appointments
