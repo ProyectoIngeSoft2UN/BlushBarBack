@@ -1,4 +1,5 @@
 class ServicesController < ApplicationController
+
   def index
     render json: Service.all, root: "data"
   end
@@ -17,11 +18,12 @@ class ServicesController < ApplicationController
 	end
 
 	def create
-		@service = Service.new(params[:service])
+		@service = Service.new(service_params)
+    p @service
 		if @service.save
 			redirect_to @service
 		else
-			render "new"
+			render @service.errors.full_messages
 		end
 	end
 
@@ -100,5 +102,10 @@ class ServicesController < ApplicationController
     end
     render json: @service
   end
+
+  private
+    def service_params
+      params.permit(:name, :cost, :description)
+    end
 
 end

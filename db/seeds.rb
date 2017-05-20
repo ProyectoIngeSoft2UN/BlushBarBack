@@ -122,7 +122,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!("clients")
 generateValues.times do |i|
 	nm = Faker::Name.unique.first_name
 	lastnm = Faker::Name.unique.last_name
-	Client.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'clientpwd', password_confirmation: 'clientpwd', phone: Faker::PhoneNumber.phone_number,address: Faker::Address.street_address,city: ['Bogota','Medellin'].sample)
+	Client.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'clientpwd', password_confirmation: 'clientpwd', phone: Faker::PhoneNumber.phone_number,address: Faker::Address.street_address,city: ['Bogota','Medellin'].sample, confirmed_at: Time.zone.now)
 end
 
 Admin.destroy_all
@@ -131,7 +131,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!("admins")
 admins = generateValues.times do |i|
 	nm = Faker::Name.unique.first_name
 	lastnm = Faker::Name.unique.last_name
-	Admin.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'adminpwd', password_confirmation: 'adminpwd', phone: Faker::PhoneNumber.phone_number)
+	Admin.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'adminpwd', password_confirmation: 'adminpwd', phone: Faker::PhoneNumber.phone_number, confirmed_at: Time.zone.now)
 end
 
 Store.destroy_all
@@ -166,7 +166,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!("employees")
 generateValues.times do |i|
 	nm = Faker::Name.unique.first_name
 	lastnm = Faker::Name.unique.last_name
-	em = Employee.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'employeepwd', password_confirmation: 'employeepwd', phone: Faker::PhoneNumber.phone_number, store_id: Store.find(rand(1..5)).id)
+	em = Employee.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'employeepwd', password_confirmation: 'employeepwd', phone: Faker::PhoneNumber.phone_number, store_id: Store.find(rand(1..5)).id, confirmed_at: Time.zone.now)
   # em.store.create(store_id: [s1,s2,s3,s4,s5].sample)
 end
 

@@ -17,7 +17,8 @@ class ProductsController < ApplicationController
 	end
 
 	def create
-		@product = Product.new(params[:product])
+		@product = Product.create(product_params)
+		p @product
 		if @product.save
 			redirect_to @product
 		else
@@ -142,6 +143,11 @@ class ProductsController < ApplicationController
 		end
 		render json: @product
 	end
+
+	private
+		def product_params
+			params.permit(:name, :description, :cost, :subcategory_id, :brand)
+		end
 
 	# def get_column_name
 	# 	col = params[:column_name]

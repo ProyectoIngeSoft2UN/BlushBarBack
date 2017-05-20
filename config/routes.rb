@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'Employee', at: 'auth'
+  mount_devise_token_auth_for 'Employee', at: 'employee_auth'
 
   mount_devise_token_auth_for 'Client', at: 'auth'
 
@@ -87,14 +87,18 @@ Rails.application.routes.draw do
       get 'cost', to: 'products#get_cost_by_id'
     end
     root to: 'products#index'
-    get '', to: 'products#show'
+    # get '', to: 'products#show'
     # get ':id', to: 'products#show'
     # show '', to: 'products#show'
     # collection do
     #   get 'get-by-name' to: 'products#get_products_by_name'
     # end
   end
-  resources :products
+  # post :products do
+  #   order = Order.from_hash( params['order'] )
+  #   order.process
+  #   # ....
+  # end
   resources :stores do
     collection do
       get 'search_by_address', to: 'stores#get_stores_by_address'
@@ -131,6 +135,7 @@ Rails.application.routes.draw do
   end
 
   resources :employees do
+    root to: 'employees#index'
     collection do
       get 'search_by_name', to: 'employees#get_employees_by_name'
       get 'search_by_lastname', to: 'employees#get_employees_by_lastname'
@@ -138,8 +143,7 @@ Rails.application.routes.draw do
       get 'search_by_email', to: 'employees#get_employees_by_email'
       get 'search', to: 'employees#get_employees_query'
     end
-    root to: 'employee#index'
-  	resources :appointments;
+  	resources :appointments
   end
   #Rutas de consulta límitadas a :list y :show
   namespace :stores do

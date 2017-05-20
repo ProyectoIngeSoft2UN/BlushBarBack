@@ -19,7 +19,7 @@ class AdminsController < ApplicationController
 	end
 
 	def create
-		@admin = Admin.new(params[:admin])
+		@admin = Admin.new(admins_params)
 		if @admin.save
 			redirect_to @Admin
 		else
@@ -158,4 +158,9 @@ class AdminsController < ApplicationController
 			render json: @admin
 		end
 	end
+
+	private
+		def admins_params
+			params.permit(:cc, :name, :lastName, :email, :phon)
+		end
 end

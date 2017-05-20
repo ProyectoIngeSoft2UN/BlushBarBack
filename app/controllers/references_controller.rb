@@ -17,7 +17,7 @@ class ReferencesController < ApplicationController
 	end
 
 	def create
-		@reference = Reference.new(params[:reference])
+		@reference = Reference.new(references_params)
 		if @reference.save
 			redirect_to @reference
 		else
@@ -75,5 +75,8 @@ class ReferencesController < ApplicationController
 		end
 		render json: @reference
 	end
-
+	private
+		def references_params
+			params.permit(:name, :product_id, :description)
+		end
 end

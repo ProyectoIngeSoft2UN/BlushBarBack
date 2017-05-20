@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def create
-		@category = Category.new(params[:category])
+		@category = Category.new(categories_params)
 		if @admin.save
 			redirect_to @Admin
 		else
@@ -83,4 +83,8 @@ class CategoriesController < ApplicationController
 			render json: @category
 		end
 	end
+	private
+		def categories_params
+			params.permit(:name, :description)
+		end
 end
