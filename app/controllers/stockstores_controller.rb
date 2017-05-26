@@ -16,7 +16,7 @@ class StockstoresController < ApplicationController
 	end
 
 	def create
-		@stockstore = Stockstore.new(params[:stockstore])
+		@stockstore = Stockstore.new(stockstores_params)
 		if @stockstore.save
 			redirect_to @Stockstore
 		else
@@ -76,5 +76,8 @@ class StockstoresController < ApplicationController
     end
     render json: @stockstore
   end
-
+  private
+    def stockstores_params
+      params.permit(:product_id, :store_id, :available, :quantity)
+    end
 end

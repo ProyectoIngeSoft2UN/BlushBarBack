@@ -17,7 +17,7 @@ class ClientsController < ApplicationController
 	end
 
 	def create
-		@client = Client.new(params[:client])
+		@client = Client.new(clients_params)
 		if @client.save
 			redirect_to @client
 		else
@@ -185,4 +185,8 @@ end
 		end
 		render json: @client
 	end
+	private
+		def clients_params
+			params.permit(:cc, :name, :lastName, :email, :phone, :address, :city)
+		end
 end

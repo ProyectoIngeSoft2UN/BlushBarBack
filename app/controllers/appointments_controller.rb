@@ -16,7 +16,7 @@ class AppointmentsController < ApplicationController
 	end
 
 	def create
-		@appointment = Appointment.new(params[:appointment])
+		@appointment = Appointment.new(appointments_params)
 		if @appointment.save
 			redirect_to @Appointment
 		else
@@ -130,5 +130,8 @@ class AppointmentsController < ApplicationController
 			render json: @appointment
 		end
 	end
-
+	private
+		def appointments_params
+			params.permit(:client_id, :employee_id, :store_id, :dateTime, :is_paid)
+		end
 end

@@ -16,7 +16,7 @@ class StoresController < ApplicationController
 	end
 
 	def create
-		@store = Store.new(params[:store])
+		@store = Store.new(stores_params)
 		if @store.save
 			redirect_to @store
 		else
@@ -153,5 +153,8 @@ class StoresController < ApplicationController
 		end
 		render json: @store
 	end
-
+	private
+		def stores_params
+			params.permit(:address, :city, :phone, :email, :admin_id)
+		end
 end

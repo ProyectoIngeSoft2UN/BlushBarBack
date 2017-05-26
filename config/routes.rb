@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :employees
-  devise_for :clients
+  mount_devise_token_auth_for 'Employee', at: 'employee_auth'
+
+  mount_devise_token_auth_for 'Client', at: 'auth'
+
+  mount_devise_token_auth_for 'Admin', at: 'admin_auth'
+  as :admin do
+    # Define routes for Admin within this block.
+  end
+  as :client do
+    # Define routes for Client within this block.
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # root 'welcome#index'
   # resources :clients, :employees, :stores, :appointments
@@ -79,14 +87,18 @@ Rails.application.routes.draw do
       get 'cost', to: 'products#get_cost_by_id'
     end
     root to: 'products#index'
-    get '', to: 'products#show'
+    # get '', to: 'products#show'
     # get ':id', to: 'products#show'
     # show '', to: 'products#show'
     # collection do
     #   get 'get-by-name' to: 'products#get_products_by_name'
     # end
   end
-  resources :products
+  # post :products do
+  #   order = Order.from_hash( params['order'] )
+  #   order.process
+  #   # ....
+  # end
   resources :stores do
     collection do
       get 'search_by_address', to: 'stores#get_stores_by_address'
@@ -123,6 +135,7 @@ Rails.application.routes.draw do
   end
 
   resources :employees do
+    root to: 'employees#index'
     collection do
       get 'search_by_name', to: 'employees#get_employees_by_name'
       get 'search_by_lastname', to: 'employees#get_employees_by_lastname'
@@ -130,8 +143,7 @@ Rails.application.routes.draw do
       get 'search_by_email', to: 'employees#get_employees_by_email'
       get 'search', to: 'employees#get_employees_query'
     end
-    root to: 'employee#index'
-  	resources :appointments;
+  	resources :appointments
   end
   #Rutas de consulta límitadas a :list y :show
   namespace :stores do

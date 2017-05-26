@@ -7,12 +7,14 @@ CarrierWave.configure do |config|
     end
   end
 
-	# config.fog_credentials = {
-  #     :provider               => 'AWS',
-  #     :aws_access_key_id      => "YOUR AMAZON ACCESS KEY",
-  #     :aws_secret_access_key  => "YOUR AMAZON SECRET KEY",
-  #     :region                 => 'us-west-1' # Change this for different AWS region. Default is 'us-east-1'
-  # }
+  # CarrierWave.configure do |config|
+  #   config.fog_provider = 'fog/google'                        # required
+  #   config.fog_credentials = {
+  #     provider:                         'Google',
+  #     google_storage_access_key_id:     'GOOGI2H52PX2RUYEYFSB',
+  #     google_storage_secret_access_key: 'BC4uqQFyxuuQEZ+dH3o3pFVLC8ZwT9PL5V8oXcdZ'
+  #   }
+  #   config.fog_directory = 'blush-back-bucket'
 
 	# config.fog_directory  = '<bucket name goes here>'               # required
 	# config.fog_host       = 'https://assets.example.com'           # optional, defaults to nil

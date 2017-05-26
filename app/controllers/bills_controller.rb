@@ -17,7 +17,7 @@ class BillsController < ApplicationController
 	end
 
 	def create
-		@bill = Bill.new(params[:bill])
+		@bill = Bill.new(bills_params)
 		if @bill.save
 			redirect_to @bill
 		else
@@ -102,4 +102,8 @@ class BillsController < ApplicationController
 			render json: @bill
 		end
   end
+  private
+    def bills_params
+      params.permit(:payment_method, :description, :cost)
+    end
 end

@@ -17,7 +17,7 @@ class SubcategoriesController < ApplicationController
 	end
 
 	def create
-		@subcategory = Subcategory.new(params[:subcategory])
+		@subcategory = Subcategory.new(subcategories_params)
 		if @subcategory.save
 			redirect_to @subcategory
 		else
@@ -92,4 +92,8 @@ class SubcategoriesController < ApplicationController
 		end
 		render json: @subcategory
 	end
+	private
+		def subcategories_params
+			params.permit(:name, :description, :category_id)
+		end
 end

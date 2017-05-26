@@ -78,16 +78,91 @@ ActiveRecord::Base.connection.reset_pk_sequence!("products")
 
 #[Nombre, costo, subcategory_id, image_id,brand]
 product_arr = [
-  ['Galateis Douceur',137000,1,1,'Bliss'],
+  ['Love Light',121000,1,1,'Too Faced'],
+  ['Papa Dont Peach',121000,1,1,'Too Faced'],
+  ['Sun Bunny Bronzer',121000,1,1,'Too Faced'],
+  ['Skin Foundation Stick',189000,1,1,'Too Faced'],
+  ['Pimed & Poreless Face Primer',121000,1,1,'Too Faced'],
+  ['Fine Herbal Cleanser',157000,2,1,'Farmaesthetics'],
+  ['Gel Pure Focus',100000,2,1,'Lancome'],
+  ['Ultra Conditioning Lip Balm',16000,2,1,"Burt's Bees"],
+  ['Beeswax Lip Balm',15000,2,1,'Burt Bees'],
   ['Pure Tonic',121000,2,1,'Butter London'],
-  ['Cocoa Powder',137000,3,2,'Nest'],
+  ['Patent Shine',73000,3,2,'Butter London'],
+  ['Nail Lacquer',49000,3,2,'Butter London'],
+  ['Melt Away Cuticle Exfoliator',63000,3,2,'Butter London'],
+  ['Hardwear Shine UV Topcoat',63000,3,2,'Butter London'],
   ['Soft Matte Lip Cream',39000,4,2,'Tocca'],
-  ['Grandiose Liner',158000,5,3,'Bliss'],
-  ['Slide on pincel',42000,5,3,'Bliss'],
-  ['Sourcilis Styler',114000,6,4,'Giorgio Armani'],
-  ['Pattent Shine',73000,7,4,'Tocca'],
-  ['Nutrient Dense Oil',234000,8,5,'Nest'],
-  ['Virgin Luxury Oil',290000,8,5,'Nest'],
+  ['Natural Love Eye Shadow Collection',238000,4,2,'Too Faced'],
+  ['Shadow Insurance Eye Shadow Primer',81000,4,2,'Too Faced'],
+  ['Shadow Palette',157000,4,2,'Butter London'],
+  ['Grandiose Liner',158000,4,2,'Lancome'],
+  ['Makeup Remover Glove',39000,4,2,'Blush Bar'],
+  ['Pure Complexion Tonic',121000,5,3,'Farmaesthetics'],
+  ['Fabulous Foaming Face Wash',36000,5,3,'Bliss'],
+  ['Tonique Confort',115000,5,3,'Lancome'],
+  ['Eau Micellaire Douceur',150000,5,3,'Lancome'],
+  ['Juju Bar',113000,5,3,'Drunk Elephant'],
+  ['Facial Cleansing Towelettes With White Tea Extract',29000,5,3,"Burt's Bees"],
+  ['Nourishing Lavender Milk',157000,6,3,'Farmaesthetics'],
+  ['Hydra Zen SPF 15',225000,6,3,'Lancome'],
+  ['Absolue Nuit Premium ßx',844000,6,3,'Lancome'],
+  ['Triple Oxygen Ex-Glow-Sion Moisture Cream',258000,6,3,'Bliss'],
+  ['Nutrient Dense Fine Facial Oil',234000,7,4,'Farmaesthetics'],
+  ['Visionnaire Lumineuse',327000,7,4,'Lancome'],
+  ['Génifique Créme',378000,7,4,'Lancome'],
+  ['Virgin Marula Luxury Facial Oil',290000,7,4,'Drunk Elephant'],
+  ['Buffing Grains for Face',174000,8,5,'Bobbi Brown'],
+  ['Vassar Rose Perfecting Polish',121000,8,5,'Farmaesthetics'],
+  ["That'S Incredi-'Peel'! Glycolic Resurfacing Pads",197000,8,5,'Bliss'],
+  ['Umbra Sheer Physical Defense SPF 30',153000,10,5,'Drunk Elephant'],
+  ['Genifique Eye Pearl',343000,11,5,'Lancome'],
+  ['White Sandalwood Eau de Parfum',101000,12,5,'NEST Fragances'],
+  ['Paradise Eau de Parfum',101000,12,5,'NEST Fragances'],
+  ['Simone Eau de Parfum',274000,12,5,'Tocca'],
+  ['Isabel Eau de Parfum',274000,12,5,'Tocca'],
+  ['Tresor Midnight Rose Eau de Parfum',315000,12,5,'Lancome'],
+  ['Si Eau de Toilette',390000,12,5,'Giorgio Armani'],
+  ['Emporio Armani Elle',324000,12,5,'Giorgio Armani'],
+  ['Acqua Di Giò Profumo',511000,13,5,'Giorgio Armani'],
+  ['Acqua Di Giò Homme Essenza',392000,13,5,'Giorgio Armani'],
+  ['Emporio Armani Il',318000,13,5,'Giorgio Armani'],
+  ['Armani Code Ice',405000,13,5,'Giorgio Armani'],
+  ['Vanilla Orchid & Almond Classic Candle',154000,14,5,'NEST Fragances'],
+  ['Orange Blossom Classic Candle',154000,14,5,'NEST Fragances'],
+  ['Grapefruit Classic Candle',154000,14,5,'NEST Fragances'],
+  ['Tocca Beauty Candele Da Viaggio',171000,14,5,'Tocca'],
+  ['Stella Candela',129000,14,5,'Tocca'],
+  ['Lemon Sage Body Butter',117000,15,5,'Bliss'],
+  ['Honey & Shea Body Butter',46000,15,5,"Burt's Bees"],
+  ['Vanilla Bergamot Body Butter',117000,15,5,'Bliss'],
+  ['Lemon Sage Body Scrub',145000,15,5,'Bliss'],
+  ['Hot Salt Scrub',153000,16,5,'Bliss'],
+  ['Blood Orange White Pepper Sugar Scrub',145000,16,5,'Bliss'],
+  ['Stella Crema Da Mano',40000,17,5,'Tocca'],
+  ['Giulietta Crema Da Mano',40000,17,5,'Tocca'],
+  ['Almond & Milk Hand Cream',37000,17,5,"Burt's Bees"],
+  ['Lemon Sage Soapy Suds',73000,19,5,'Bliss'],
+  ['Grapefruit Aloe Soapy Suds',73000,19,5,'Bliss'],
+  ['Blood Orange White Pepper Soapy Suds',73000,19,5,'Bliss'],
+  ['Softening Socks',200000,20,5,'Bliss'],
+  ['Glamour Gloves',200000,20,5,'Bliss'],
+  ['Fat Girl Six Tummy Toning Gel',153000,20,5,'Bliss'],
+  ['Blending Sponge',34000,21,5,'Blush Bar'],
+  ['Brush Egg Cleaner',39000,21,5,'Blush Bar'],
+  ['Konjac Sponge',42000,21,5,'Blush Bar'],
+  ['Brocha Precise Eye Liner',46000,21,5,'Blush Bar'],
+  ['Brocha Airbrush Foundation',79000,21,5,'Blush Bar'],
+  ['Brocha Kabuki Con Estuche',83000,21,5,'Blush Bar'],
+  ['Retractable Kabuki Brush',137000,21,5,'Too Faced'],
+  ['Makeup Bag Go Blush Yourself',39000,22,5,'Blush Bar'],
+  ['Makeup Bag Cinderella',39000,22,5,'Blush Bar'],
+  ['Makeup Bag Beauty Begins',39000,22,5,'Blush Bar'],
+  ['Bolsa De Maquillaje',22000,22,5,'Blush Bar'],
+  ['Tajalapiz',21000,23,5,'NYX'],
+  ['Cepillo de Pelo Pequeño',25000,24,5,'Blush Bar'],
+  ['Encrespador De Pestañas',32000,25,5,'Blush Bar'],
+  ['Fat Girl Slim Slimulator',89000,27,5,'Blush Bar'],
 ]
 
 product_arr.each do |i|
@@ -122,7 +197,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!("clients")
 generateValues.times do |i|
 	nm = Faker::Name.unique.first_name
 	lastnm = Faker::Name.unique.last_name
-	Client.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'clientpwd', password_confirmation: 'clientpwd', phone: Faker::PhoneNumber.phone_number,address: Faker::Address.street_address,city: ['Bogota','Medellin'].sample)
+	Client.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'clientpwd', password_confirmation: 'clientpwd', phone: Faker::PhoneNumber.phone_number,address: Faker::Address.street_address,city: ['Bogota','Medellin'].sample, confirmed_at: Time.zone.now)
 end
 
 Admin.destroy_all
@@ -131,7 +206,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!("admins")
 admins = generateValues.times do |i|
 	nm = Faker::Name.unique.first_name
 	lastnm = Faker::Name.unique.last_name
-	Admin.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'adminpwd', password_confirmation: 'adminpwd', phone: Faker::PhoneNumber.phone_number)
+	Admin.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'adminpwd', password_confirmation: 'adminpwd', phone: Faker::PhoneNumber.phone_number, confirmed_at: Time.zone.now)
 end
 
 Store.destroy_all
@@ -166,7 +241,7 @@ ActiveRecord::Base.connection.reset_pk_sequence!("employees")
 generateValues.times do |i|
 	nm = Faker::Name.unique.first_name
 	lastnm = Faker::Name.unique.last_name
-	em = Employee.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'employeepwd', password_confirmation: 'employeepwd', phone: Faker::PhoneNumber.phone_number, store_id: Store.find(rand(1..5)).id)
+	em = Employee.create!(cc: Faker::Number.number(10), name: nm, lastName: lastnm, email: Faker::Internet.email, password: 'employeepwd', password_confirmation: 'employeepwd', phone: Faker::PhoneNumber.phone_number, store_id: Store.find(rand(1..5)).id, confirmed_at: Time.zone.now)
   # em.store.create(store_id: [s1,s2,s3,s4,s5].sample)
 end
 

@@ -16,7 +16,7 @@ class EmployeesController < ApplicationController
 	end
 
 	def create
-		@employee = employee.new(params[:employee])
+		@employee = employee.new(employees_params)
 		if @employee.save
 			redirect_to @Employee
 		else
@@ -167,4 +167,8 @@ class EmployeesController < ApplicationController
 		end
 		render json: @employee
 	end
+	private
+		def employees_params
+			params.permit(:cc, :name, :lastName, :email, :phone, :store_id)
+		end
 end

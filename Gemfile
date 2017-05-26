@@ -1,10 +1,15 @@
-source 'https://rubygems.org'
+ source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
 
+# gem "fog-google"
+# gem "google-api-client", "> 0.8.5", "< 0.9"
+# gem "mime-types"
+# gem 'imgur-api'
+gem 'rack-parser', :require => 'rack/parser'
 gem 'will_paginate', '~> 3.1.0'
 gem 'devise_token_auth'
 gem 'devise'
@@ -12,7 +17,7 @@ gem 'omniauth'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'faker'
 #ASM
-gem "active_model_serializers", github: "rails-api/active_model_serializers"
+gem "active_model_serializers", '0.10.0.rc4'
 
 gem 'fog'
 # Resize
